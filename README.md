@@ -146,7 +146,7 @@ flowchart TD
 
 ## Installation
 
-### Option A: run from a clone (simplest for Claude Desktop)
+Clone the repository and install its dependencies:
 
 ```bash
 git clone https://github.com/yourlastnamesoundslikeatypeofpasta/acumatica-mcp-server.git
@@ -156,17 +156,6 @@ python -m venv .venv
 # macOS/Linux:  source .venv/bin/activate
 pip install -r requirements.txt
 ```
-
-
-
-### Option B: pip install
-
-```bash
-pip install acumatica-mcp-server
-```
-
-This installs an `acumatica-mcp-server` console entry point and
-`python -m acumatica_mcp.server`.
 
 
 
