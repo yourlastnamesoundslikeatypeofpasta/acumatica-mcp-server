@@ -22,7 +22,7 @@ import os
 import sys
 from pathlib import Path
 from typing import Any
-from urllib.parse import urlencode
+from urllib.parse import quote, urlencode
 
 import httpx
 from dotenv import load_dotenv
@@ -347,6 +347,15 @@ def _build_odata_params(
     return params
 
 
+def _enc_key(key: str) -> str:
+    """URL-encode a record key for use in the path, preserving '/' as the
+    composite-key separator. Encodes '#', '?', '%', spaces, etc. so a key like a
+    StockItem's "#05773" is not mangled - an unencoded '#' would be parsed as a URL
+    fragment and silently drop the key from the request.
+    """
+    return "/".join(quote(segment, safe="") for segment in key.split("/"))
+
+
 def _write_blocked(kind: str, env_var: str) -> dict[str, Any]:
     """Uniform 'mutations disabled' response for the read-only-by-default gate."""
     return {
@@ -561,7 +570,7 @@ def get_record(
             [050297](https://example.acumatica.com/Main?ScreenId=AP301000&ID=...)
     """
     params = _build_odata_params(None, None, None, select, expand, None, custom)
-    r = session.request("GET", f"/{entity}/{id}", params=params)
+    r = session.request("GET", f"/{entity}/{_enc_key(id)}", params=params)
     out = _format_response(r, entity=entity)
     if not out.get("ok") and out.get("status") in (400, 404, 500):
         meta = ENTITY_CATALOG.get(entity, {})
@@ -600,7 +609,7 @@ def delete_record(entity: str, id: str) -> dict[str, Any]:
     """Delete a record by ID or key fields. Requires ACUMATICA_ALLOW_DELETES=1."""
     if not ALLOW_DELETES:
         return _write_blocked("Deletes", "ACUMATICA_ALLOW_DELETES")
-    r = session.request("DELETE", f"/{entity}/{id}")
+    r = session.request("DELETE", f"/{entity}/{_enc_key(id)}")
     return _format_response(r)
 
 
@@ -646,7 +655,7 @@ def get_schema(entity: str) -> dict[str, Any]:
     Two reasons to call this:
 
     1. Discover user-defined extension fields (UsrXxx fields, attribute fields like
-       AttributeBOATNBR) that are NOT in the standard contract and not listed by
+       AttributeCOLOR) that are NOT in the standard contract and not listed by
        describe_entity(). These appear nested under a view name in the response.
 
     2. Discover the available VIEW NAMES for this entity's graph. View names are the
