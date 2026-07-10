@@ -1,0 +1,21 @@
+{
+  "_comment": "Example Claude Desktop MCP registration. Add the 'acumatica' block below to the 'mcpServers' object in your claude_desktop_config.json. Credentials are passed via the 'env' block, so no .env file is required. Replace the 'command' path and all credential values. The server is READ-ONLY by default: set ACUMATICA_ALLOW_WRITES to '1' to enable upsert/actions, and ACUMATICA_ALLOW_DELETES to '1' to enable deletes.",
+
+  "mcpServers": {
+    "acumatica": {
+      "command": "python",
+      "args": [
+        "C:/path/to/acumatica-mcp-server/src/acumatica_mcp/server.py"
+      ],
+      "env": {
+        "ACUMATICA_BASE_URL": "https://your-instance.acumatica.com",
+        "ACUMATICA_ENDPOINT_PATH": "/entity/Default/24.200.001",
+        "ACUMATICA_USERNAME": "service_account",
+        "ACUMATICA_PASSWORD": "your-password",
+        "ACUMATICA_COMPANY": "YourCompany",
+        "ACUMATICA_ALLOW_WRITES": "0",
+        "ACUMATICA_ALLOW_DELETES": "0"
+      }
+    }
+  }
+}

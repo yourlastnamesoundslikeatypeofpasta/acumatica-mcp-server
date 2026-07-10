@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "acumatica-mcp-server"
+version = "0.1.0"
+description = "A Model Context Protocol (MCP) server for Acumatica ERP — query and act on any tenant's contract-based REST API through 8 generic tools."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Christian Zagazeta" }]
+keywords = ["acumatica", "erp", "mcp", "model-context-protocol", "claude", "llm", "ai"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Office/Business :: Financial",
+]
+dependencies = [
+  "mcp>=1.0.0",
+  "httpx>=0.27.0",
+  "python-dotenv>=1.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourlastnamesoundslikeatypeofpasta/acumatica-mcp-server"
+Repository = "https://github.com/yourlastnamesoundslikeatypeofpasta/acumatica-mcp-server"
+Issues = "https://github.com/yourlastnamesoundslikeatypeofpasta/acumatica-mcp-server/issues"
+
+[project.scripts]
+acumatica-mcp-server = "acumatica_mcp.server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+acumatica_mcp = ["entity_catalog.json"]

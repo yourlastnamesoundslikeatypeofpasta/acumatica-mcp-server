@@ -1,0 +1,3639 @@
+{
+  "Account": {
+    "actions": [],
+    "fields": [
+      "AccountCD",
+      "AccountClass",
+      "AccountGroup",
+      "AccountID",
+      "Active",
+      "CashAccount",
+      "ChartOfAccountsOrder",
+      "ConsolidationAccount",
+      "CreatedDateTime",
+      "CurrencyID",
+      "Description",
+      "LastModifiedDateTime",
+      "PostOption",
+      "RequireUnits",
+      "RevaluationRateType",
+      "Secured",
+      "TaxCategory",
+      "Type",
+      "UseDefaultSubaccount"
+    ],
+    "key_fields": [
+      "AccountCD"
+    ],
+    "key_format": "Single value: <AccountCD>"
+  },
+  "AccountDetailsForPeriodInquiry": {
+    "actions": [],
+    "fields": [
+      "FromPeriod",
+      "Ledger",
+      "ToPeriod",
+      "IncludeUnposted",
+      "IncludeUnreleased"
+    ],
+    "expand": [
+      "Results"
+    ],
+    "query_only": true,
+    "mandatory_filters": [
+      "FromPeriod",
+      "ToPeriod",
+      "Ledger"
+    ]
+  },
+  "AccountGroup": {
+    "actions": [],
+    "fields": [
+      "AccountGroupID",
+      "Active",
+      "DefaultAccountID",
+      "Description",
+      "Expense",
+      "LastModifiedDateTime",
+      "SortOrder",
+      "Type"
+    ],
+    "expand": [
+      "Attributes"
+    ],
+    "key_fields": [
+      "GroupID"
+    ],
+    "key_format": "Single value: <GroupID>"
+  },
+  "AccountSummaryInquiry": {
+    "actions": [],
+    "fields": [
+      "AccountClass",
+      "Branch",
+      "Ledger",
+      "Period",
+      "Subaccount"
+    ],
+    "expand": [
+      "Results"
+    ],
+    "query_only": true,
+    "mandatory_filters": [
+      "Period",
+      "Ledger",
+      "Branch",
+      "Subaccount"
+    ]
+  },
+  "Activity": {
+    "actions": [
+      "CompleteActivity"
+    ],
+    "fields": [
+      "Body",
+      "Date",
+      "Internal",
+      "NoteID",
+      "Owner",
+      "Status",
+      "Summary",
+      "Task",
+      "TimeActivity",
+      "Type",
+      "Workgroup",
+      "CreatedByID",
+      "CreatedDateTime",
+      "LastModifiedDateTime",
+      "RelatedEntityType",
+      "RelatedEntityNoteID",
+      "RelatedEntityDescription"
+    ],
+    "key_fields": [
+      "NoteID",
+      "Type"
+    ]
+  },
+  "AmazonStore": {
+    "actions": [],
+    "fields": [
+      "BindingName",
+      "LocaleName",
+      "Marketplace",
+      "RefreshToken",
+      "Region",
+      "SellerPartnerId",
+      "Active",
+      "Default"
+    ],
+    "key_fields": []
+  },
+  "Appointment": {
+    "actions": [
+      "AppRecalcExternalTax",
+      "CancelAppointment",
+      "CloseAppointment",
+      "CompleteAppointment",
+      "InvoiceAppointment",
+      "PauseAppointment",
+      "ReopenAppointment",
+      "ResumeAppointment",
+      "StartAppointment",
+      "UncloseAppointment"
+    ],
+    "expand": [
+      "Details",
+      "Staff",
+      "ResourceEquipment"
+    ],
+    "fields": [
+      "ActualDuration",
+      "ActualEndDate",
+      "ActualEndTime",
+      "ActualHandleManually",
+      "ActualServiceDuration",
+      "ActualStartDate",
+      "ActualStartTime",
+      "AppointmentNbr",
+      "AppointmentTotal",
+      "BranchLocation",
+      "Confirmed",
+      "CostTotal",
+      "Customer",
+      "DefaultProjectTask",
+      "Description",
+      "EstimatedServiceDuration",
+      "FinancialSettings",
+      "Finished",
+      "Hold",
+      "LastModifiedDateTime",
+      "Location",
+      "OptimizationResult",
+      "OtherInformation",
+      "Override",
+      "Profit",
+      "Project",
+      "ScheduledDuration",
+      "ScheduledEndDate",
+      "ScheduledEndTime",
+      "ScheduledHandleManually",
+      "ScheduledStartDate",
+      "ScheduledStartTime",
+      "ServiceOrderNbr",
+      "ServiceOrderType",
+      "Status",
+      "TaxTotal",
+      "Totals",
+      "UnreachedCustomer",
+      "ValidatedbyDispatcher",
+      "WaitingforPurchasedItems",
+      "WorkflowStage"
+    ],
+    "key_fields": [
+      "SrvOrdType",
+      "RefNbr"
+    ],
+    "key_format": "Slash-separated: <SrvOrdType>/<RefNbr>",
+    "note": "May return 403 Forbidden if the Field Service module is not granted to the API service account."
+  },
+  "AttributeDefinition": {
+    "actions": [],
+    "fields": [
+      "AttributeID",
+      "ControlType",
+      "CreatedDateTime",
+      "Description",
+      "EntryMask",
+      "Internal",
+      "LastModifiedDateTime",
+      "RegExp"
+    ],
+    "expand": [
+      "Values"
+    ],
+    "key_fields": [
+      "AttributeID",
+      "ControlType"
+    ]
+  },
+  "BigCommerceStores": {
+    "actions": [],
+    "fields": [
+      "AccessToken",
+      "Active",
+      "APIPath",
+      "ClientID",
+      "Connector",
+      "Default",
+      "StoreAdminPath",
+      "StoreName",
+      "WebDAVPassword",
+      "WebDAVPath",
+      "WebDAVUsername"
+    ],
+    "key_fields": [
+      "ClientID"
+    ]
+  },
+  "Bill": {
+    "actions": [
+      "ReleaseBill",
+      "ReleaseRetainage",
+      "ReverseBill"
+    ],
+    "expand": [
+      "Details",
+      "TaxDetails",
+      "ApplicationDetails"
+    ],
+    "fields": [
+      "Amount",
+      "ApprovedForPayment",
+      "Balance",
+      "BranchID",
+      "CashAccount",
+      "CurrencyID",
+      "Date",
+      "Description",
+      "DueDate",
+      "Hold",
+      "LocationID",
+      "PostPeriod",
+      "Project",
+      "ReferenceNbr",
+      "Status",
+      "TaxTotal",
+      "Terms",
+      "Type",
+      "Vendor",
+      "VendorRef",
+      "IsTaxValid",
+      "LastModifiedDateTime"
+    ],
+    "key_fields": [
+      "Type",
+      "ReferenceNbr"
+    ],
+    "key_format": "Slash-separated: <Type>/<ReferenceNbr>"
+  },
+  "Budget": {
+    "actions": [],
+    "fields": [
+      "Branch",
+      "ComparetoBranch",
+      "ComparetoLedger",
+      "ComparetoYear",
+      "FinancialYear",
+      "Ledger",
+      "SubaccountFilter",
+      "TreeNodeFilter"
+    ],
+    "expand": [
+      "Details"
+    ],
+    "query_only": true,
+    "mandatory_filters": [
+      "FinancialYear",
+      "Ledger",
+      "Branch"
+    ]
+  },
+  "BusinessAccount": {
+    "actions": [
+      "ChangeBusinessAccountID",
+      "CheckForBusinessAccountDuplicates",
+      "ConvertBusinessAccountToCustomer",
+      "CreateContactFromBusinessAccount",
+      "MarkBusinessAccountAsValidated",
+      "ValidateBusinessAccountAddresses"
+    ],
+    "fields": [
+      "AccountRef",
+      "BusinessAccountID",
+      "ClassID",
+      "DefaultLocationSettings",
+      "Duplicate",
+      "LastIncomingActivity",
+      "LastModifiedDateTime",
+      "LastOutgoingActivity",
+      "MainAddress",
+      "MainAddressValidated",
+      "MainContact",
+      "Name",
+      "Owner",
+      "OwnerEmployeeName",
+      "ParentAccount",
+      "PrimaryContact",
+      "ShippingAddress",
+      "ShippingAddressOverride",
+      "ShippingAddressValidated",
+      "ShippingContact",
+      "SourceCampaign",
+      "Status",
+      "Type",
+      "Workgroup",
+      "WorkgroupDescription",
+      "NoteID",
+      "CurrencyID",
+      "EnableCurrencyOverride"
+    ],
+    "expand": [
+      "Activities",
+      "Attributes",
+      "Campaigns",
+      "Cases",
+      "Contacts",
+      "Contracts",
+      "Duplicates",
+      "Locations",
+      "MarketingLists",
+      "Opportunities",
+      "Orders",
+      "Relations"
+    ],
+    "key_fields": [
+      "BusinessAccountID"
+    ],
+    "key_format": "Single value: <BusinessAccountID>",
+    "note": "May return 403 Forbidden if the CRM module is not granted to the API service account."
+  },
+  "Carrier": {
+    "actions": [],
+    "fields": [
+      "CarrierID",
+      "CarrierUnits",
+      "CreatedDateTime",
+      "Description",
+      "LastModifiedDateTime",
+      "PlugInType",
+      "Centimeter",
+      "Inch",
+      "Kilogram",
+      "Pound",
+      "WarehouseID"
+    ],
+    "expand": [
+      "CustomerAccounts",
+      "PlugInParameters"
+    ],
+    "key_fields": [
+      "CarrierID",
+      "PlugInType"
+    ]
+  },
+  "Case": {
+    "actions": [
+      "AssignCase",
+      "ReleaseCase"
+    ],
+    "expand": [
+      "Activities"
+    ],
+    "fields": [
+      "Billable",
+      "BillableOvertime",
+      "BillableTime",
+      "BusinessAccount",
+      "BusinessAccountName",
+      "CaseID",
+      "ClassID",
+      "ClosingDate",
+      "ContactDisplayName",
+      "ContactID",
+      "Contract",
+      "DateReported",
+      "Description",
+      "InitialResponse",
+      "LastActivityDate",
+      "LastIncomingActivity",
+      "LastOutgoingActivity",
+      "Location",
+      "ManualOverride",
+      "OvertimeSpent",
+      "Owner",
+      "OwnerEmployeeName",
+      "Priority",
+      "Reason",
+      "ResolutionTime",
+      "Severity",
+      "SLA",
+      "Status",
+      "Subject",
+      "TimeSpent",
+      "Workgroup",
+      "WorkgroupDescription",
+      "LastModifiedDateTime",
+      "NoteID"
+    ],
+    "key_fields": [
+      "CaseCD"
+    ],
+    "key_format": "Single value: <CaseCD>",
+    "note": "May return 403 Forbidden if the CRM module is not granted to the API service account."
+  },
+  "CashSale": {
+    "actions": [
+      "ReleaseCashSale"
+    ],
+    "fields": [
+      "Amount",
+      "Balance",
+      "CashAccount",
+      "CreatedDateTime",
+      "CustomerID",
+      "Date",
+      "Description",
+      "Hold",
+      "LastModifiedDateTime",
+      "PaymentMethod",
+      "PaymentRef",
+      "Project",
+      "ReferenceNbr",
+      "Status",
+      "TaxTotal",
+      "Type"
+    ],
+    "expand": [
+      "Details"
+    ],
+    "key_fields": [
+      "CustomerID",
+      "ReferenceNbr"
+    ]
+  },
+  "CashTransaction": {
+    "actions": [
+      "ReleaseCashTransaction"
+    ],
+    "fields": [
+      "Approved",
+      "CashAccountCD",
+      "Description",
+      "EntryTypeCD",
+      "ExternalReferenceNumber",
+      "PostedDate"
+    ],
+    "expand": [
+      "Details"
+    ],
+    "key_fields": [
+      "CashAccountCD",
+      "EntryTypeCD"
+    ]
+  },
+  "ChangeOrder": {
+    "actions": [
+      "ApproveChangeOrder",
+      "EmailChangeOrder",
+      "HoldChangeOrder",
+      "RejectChangeOrder",
+      "ReleaseChangeOrder",
+      "RemoveChangeOrderFromHold",
+      "ReverseChangeOrder"
+    ],
+    "expand": [
+      "Details"
+    ],
+    "fields": [
+      "ChangeDate",
+      "Class",
+      "CommitmentsChangeTotal",
+      "CompletionDate",
+      "ContractTimeChangeDays",
+      "CostBudgetChangeTotal",
+      "Customer",
+      "Description",
+      "DetailedDescription",
+      "ExternalRefNbr",
+      "GrossMargin",
+      "GrossMarginAmount",
+      "Hold",
+      "LastModifiedDateTime",
+      "OriginalCORefNbr",
+      "ProjectID",
+      "RefNbr",
+      "RevenueBudgetChangeTotal",
+      "RevenueChangeNbr",
+      "ReverseStatus",
+      "Status"
+    ],
+    "key_fields": [
+      "ExternalRefNbr",
+      "OriginalCORefNbr"
+    ]
+  },
+  "ChangeOrderClass": {
+    "actions": [],
+    "fields": [
+      "Active",
+      "ClassID",
+      "Commitments",
+      "CostBudget",
+      "Description",
+      "LastModifiedDateTime",
+      "RevenueBudget"
+    ],
+    "expand": [
+      "Attributes"
+    ],
+    "key_fields": [
+      "ClassID"
+    ]
+  },
+  "Check": {
+    "actions": [
+      "ReleaseCheck",
+      "VoidCheck"
+    ],
+    "fields": [
+      "ApplicationDate",
+      "CashAccount",
+      "CurrencyID",
+      "Description",
+      "Hold",
+      "PaymentAmount",
+      "PaymentMethod",
+      "PaymentRef",
+      "ReferenceNbr",
+      "Status",
+      "Type",
+      "UnappliedBalance",
+      "Vendor",
+      "LastModifiedDateTime"
+    ],
+    "expand": [
+      "Details",
+      "History"
+    ],
+    "key_fields": [
+      "Type",
+      "ReferenceNbr"
+    ],
+    "key_format": "Slash-separated: <Type>/<ReferenceNbr>"
+  },
+  "CompaniesStructure": {
+    "actions": [],
+    "fields": [],
+    "expand": [
+      "Results"
+    ],
+    "key_fields": []
+  },
+  "CompanyFinancialPeriod": {
+    "actions": [],
+    "fields": [
+      "Company",
+      "FinancialYear",
+      "NbrOfPeriods",
+      "StartDate"
+    ],
+    "expand": [
+      "Details"
+    ],
+    "key_fields": []
+  },
+  "Contact": {
+    "actions": [
+      "CheckForContactDuplicates",
+      "CreateAccountFromContact",
+      "MarkContactAsValidated",
+      "ValidateContactAddress"
+    ],
+    "fields": [
+      "Active",
+      "Address",
+      "OverrideAccountAddress",
+      "AddressValidated",
+      "Attention",
+      "BusinessAccount",
+      "CompanyName",
+      "ContactClass",
+      "ContactID",
+      "ContactMethod",
+      "ConvertedBy",
+      "DateOfBirth",
+      "DisplayName",
+      "DoNotCall",
+      "DoNotEmail",
+      "DoNotFax",
+      "DoNotMail",
+      "Duplicate",
+      "DuplicateFound",
+      "Email",
+      "Fax",
+      "FaxType",
+      "FirstName",
+      "Gender",
+      "Image",
+      "JobTitle",
+      "LanguageOrLocale",
+      "LastIncomingActivity",
+      "LastModifiedDateTime",
+      "LastName",
+      "LastOutgoingActivity",
+      "MaritalStatus",
+      "MiddleName",
+      "NoMarketing",
+      "NoMassMail",
+      "Owner",
+      "OwnerEmployeeName",
+      "ParentAccount",
+      "Phone1",
+      "Phone1Type",
+      "Phone2",
+      "Phone2Type",
+      "Phone3",
+      "Phone3Type",
+      "QualificationDate",
+      "Reason",
+      "Source",
+      "SourceCampaign",
+      "SpouseOrPartnerName",
+      "Status",
+      "Synchronize",
+      "Title",
+      "Type",
+      "UserInfo",
+      "WebSite",
+      "Workgroup",
+      "WorkgroupDescription",
+      "NoteID",
+      "FullName",
+      "ExtRefNbr"
+    ],
+    "expand": [
+      "Activities",
+      "Attributes",
+      "Campaigns",
+      "Cases",
+      "Duplicates",
+      "MarketingLists",
+      "Notifications",
+      "Opportunities",
+      "Relations",
+      "RoleAssignments"
+    ],
+    "key_fields": [
+      "ContactID"
+    ],
+    "key_format": "Single value: <ContactID>"
+  },
+  "ContractUsage": {
+    "actions": [],
+    "fields": [
+      "ContractID",
+      "PostPeriod"
+    ],
+    "expand": [
+      "BilledTransactions",
+      "UnbilledTransactions"
+    ],
+    "key_fields": [
+      "ContractID"
+    ]
+  },
+  "CostCode": {
+    "actions": [
+      "ChangeCostCodeID"
+    ],
+    "fields": [
+      "CostCodeID",
+      "Description",
+      "LastModifiedDateTime"
+    ],
+    "key_fields": [
+      "CostCodeID"
+    ]
+  },
+  "Currency": {
+    "actions": [],
+    "fields": [
+      "Active",
+      "CreatedDateTime",
+      "CurrencyID",
+      "CurrencySymbol",
+      "DecimalPrecision",
+      "Description",
+      "LastModifiedDateTime",
+      "UseForAccounting"
+    ],
+    "key_fields": [
+      "CurrencyID"
+    ]
+  },
+  "Customer": {
+    "actions": [
+      "CreateContactFromCustomer"
+    ],
+    "expand": [
+      "Contacts",
+      "BillingContact",
+      "BillingAddress",
+      "ShippingContact",
+      "ShippingAddress",
+      "PaymentMethods",
+      "SalesPersons"
+    ],
+    "fields": [
+      "AccountRef",
+      "ApplyOverdueCharges",
+      "AutoApplyPayments",
+      "BAccountID",
+      "BillingAddressOverride",
+      "BillingContact",
+      "BillingContactOverride",
+      "CreatedDateTime",
+      "CreditVerificationRules",
+      "CurrencyID",
+      "CurrencyRateType",
+      "CustomerClass",
+      "CustomerID",
+      "CustomerCategory",
+      "CustomerName",
+      "Email",
+      "EnableCurrencyOverride",
+      "EnableRateOverride",
+      "EnableWriteOffs",
+      "FOBPoint",
+      "LastModifiedDateTime",
+      "LeadTimedays",
+      "LocationName",
+      "MainContact",
+      "MultiCurrencyStatements",
+      "OrderPriority",
+      "ParentRecord",
+      "PriceClassID",
+      "PrimaryContact",
+      "PrimaryContactID",
+      "PrintDunningLetters",
+      "PrintInvoices",
+      "PrintStatements",
+      "ResidentialDelivery",
+      "SaturdayDelivery",
+      "SendDunningLettersbyEmail",
+      "SendInvoicesbyEmail",
+      "SendStatementsbyEmail",
+      "ShippingAddressOverride",
+      "ShippingBranch",
+      "ShippingContact",
+      "ShippingContactOverride",
+      "ShippingRule",
+      "ShippingTerms",
+      "ShippingZoneID",
+      "ShipVia",
+      "StatementCycleID",
+      "StatementType",
+      "Status",
+      "TaxRegistrationID",
+      "TaxZone",
+      "Terms",
+      "WarehouseID",
+      "WriteOffLimit",
+      "RestrictVisibilityTo",
+      "CreditLimit",
+      "NoteID",
+      "EntityUsageType",
+      "TaxExemptionNumber",
+      "IsGuestCustomer"
+    ],
+    "key_fields": [
+      "CustomerID"
+    ],
+    "key_format": "Single value: <CustomerID>"
+  },
+  "CustomerClass": {
+    "actions": [],
+    "fields": [
+      "ApplyOverdueCharges",
+      "ARAccount",
+      "ARSubaccount",
+      "AutoApplyPayments",
+      "CashDiscountAccount",
+      "CashDiscountSubaccount",
+      "ClassID",
+      "COGSAccount",
+      "COGSSubaccount",
+      "Country",
+      "CreatedDateTime",
+      "CreditDaysPastDue",
+      "CreditLimit",
+      "CreditVerification",
+      "CurrencyID",
+      "CurrencyRateType",
+      "DefaultLocationIDfromBranch",
+      "DefaultRestrictionGroup",
+      "Description",
+      "DiscountAccount",
+      "DiscountSubaccount",
+      "EnableCurrencyOverride",
+      "EnableRateOverride",
+      "EnableWriteOffs",
+      "EntityUsageType",
+      "FreightAccount",
+      "FreightSubaccount",
+      "GroupDocumentDiscountLimit",
+      "LastModifiedDateTime",
+      "MiscAccount",
+      "MiscSubaccount",
+      "MultiCurrencyStatements",
+      "OverdueChargeID",
+      "OverLimitAmount",
+      "PaymentMethod",
+      "PrepaymentAccount",
+      "PrepaymentSubaccount",
+      "PrintDunningLetters",
+      "PrintInvoices",
+      "PrintStatements",
+      "RequireEntityUsageType",
+      "RequireTaxZone",
+      "SalesAccount",
+      "SalespersonID",
+      "SalesSubaccount",
+      "SendDunningLettersbyEmail",
+      "SendInvoicesbyEmail",
+      "SendStatementsByEmail",
+      "ShippingRule",
+      "ShippingTerms",
+      "ShipVia",
+      "StatementCycleID",
+      "StatementType",
+      "TaxZoneID",
+      "Terms",
+      "UnrealizedGainAccount",
+      "UnrealizedGainSubaccount",
+      "UnrealizedLossAccount",
+      "UnrealizedLossSubaccount",
+      "WriteOffLimit"
+    ],
+    "expand": [
+      "Attributes"
+    ],
+    "key_fields": [
+      "ClassID"
+    ],
+    "key_format": "Single value: <ClassID>"
+  },
+  "CustomerLocation": {
+    "actions": [],
+    "fields": [
+      "Active",
+      "AddressOverride",
+      "Calendar",
+      "ContactOverride",
+      "CreatedDateTime",
+      "Customer",
+      "Default",
+      "DefaultProject",
+      "EntityUsageType",
+      "FedExGroundCollect",
+      "FOBPoint",
+      "Insurance",
+      "LastModifiedDateTime",
+      "LeadTimeDays",
+      "LocationContact",
+      "LocationID",
+      "LocationName",
+      "OrderPriority",
+      "PriceClass",
+      "ResidentialDelivery",
+      "SaturdayDelivery",
+      "ShippingBranch",
+      "ShippingRule",
+      "ShippingTerms",
+      "ShippingZone",
+      "ShipVia",
+      "Status",
+      "TaxExemptionNbr",
+      "TaxRegistrationID",
+      "TaxZone",
+      "Warehouse",
+      "NoteID",
+      "ExtRefNbr"
+    ],
+    "expand": [
+      "RoleAssignments"
+    ],
+    "key_fields": [
+      "Customer",
+      "LocationID"
+    ],
+    "key_format": "Slash-separated: <Customer>/<LocationID>"
+  },
+  "CustomerPaymentMethod": {
+    "actions": [],
+    "fields": [
+      "Active",
+      "CardAccountNbr",
+      "CashAccount",
+      "CreatedDateTime",
+      "CustomerID",
+      "CustomerProfileID",
+      "InstanceID",
+      "LastModifiedDateTime",
+      "PaymentMethod",
+      "ProcCenterID",
+      "CardType"
+    ],
+    "expand": [
+      "Details"
+    ],
+    "key_fields": [
+      "CustomerID",
+      "CardAccountNbr"
+    ],
+    "key_format": "Slash-separated: <CustomerID>/<CardAccountNbr>"
+  },
+  "CustomerPriceClass": {
+    "actions": [],
+    "fields": [
+      "CreatedDateTime",
+      "Description",
+      "LastModifiedDateTime",
+      "PriceClassID",
+      "NoteID"
+    ],
+    "key_fields": [
+      "PriceClassID",
+      "NoteID"
+    ]
+  },
+  "DeductionBenefitCode": {
+    "actions": [],
+    "fields": [
+      "ACAApplicable",
+      "ACAInformation",
+      "Active",
+      "AffectsTaxCalculation",
+      "ApplicableWage",
+      "AssociatedWith",
+      "ContributionType",
+      "DeductionBenefitCodeID",
+      "Description",
+      "EmployeeDeduction",
+      "EmployerContribution",
+      "GLAccounts",
+      "InvoiceDescrSource",
+      "IsGarnishment",
+      "LastModifiedDateTime",
+      "PayableBenefit",
+      "ShowApplicableWageTab",
+      "TaxSettingsCA",
+      "TaxSettingsUS",
+      "Vendor",
+      "VendorInvoiceDescription",
+      "WCCCode"
+    ],
+    "key_fields": [
+      "ContributionType",
+      "DeductionBenefitCodeID"
+    ]
+  },
+  "Discount": {
+    "actions": [
+      "UpdateDiscounts"
+    ],
+    "fields": [
+      "Active",
+      "BreakBy",
+      "CreatedDateTime",
+      "Description",
+      "DiscountBy",
+      "DiscountCode",
+      "EffectiveDate",
+      "ExpirationDate",
+      "LastModifiedDateTime",
+      "Promotional",
+      "ProrateDiscount",
+      "Sequence",
+      "ShowFreeItem"
+    ],
+    "expand": [
+      "CustomerPriceClasses",
+      "Customers",
+      "DiscountBreakpoints",
+      "ItemPriceClasses",
+      "Items",
+      "Warehouses"
+    ],
+    "key_fields": []
+  },
+  "DiscountCode": {
+    "actions": [],
+    "fields": [
+      "ApplicableTo",
+      "CreatedDateTime",
+      "Description",
+      "DiscountCodeID",
+      "DiscountType",
+      "LastModifiedDateTime"
+    ],
+    "key_fields": [
+      "DiscountCodeID",
+      "DiscountType"
+    ]
+  },
+  "EarningTypeCode": {
+    "actions": [],
+    "fields": [
+      "AccrueTimeOff",
+      "Active",
+      "Category",
+      "ContributestoWCCCalculation",
+      "Description",
+      "EarningTypeCodeID",
+      "GLAccounts",
+      "LastModifiedDateTime",
+      "Multiplier",
+      "ProjectSettings",
+      "PublicHoliday",
+      "RegularTimeTypeCode",
+      "TaxAndReportingCA",
+      "TaxAndReportingUS"
+    ],
+    "key_fields": [
+      "EarningTypeCodeID"
+    ]
+  },
+  "Email": {
+    "actions": [
+      "ArchiveEmail",
+      "CancelSendingEmail",
+      "CreateCaseFromEmail",
+      "CreateContactFromEmail",
+      "CreateEventFromEmail",
+      "CreateExpenseReceiptFromEmail",
+      "CreateLeadFromEmail",
+      "CreateOpportunityFromEmail",
+      "CreateTaskFromEmail",
+      "ProcessEmail",
+      "RestoreArchivedEmail",
+      "RestoreDeletedEmail",
+      "SendEmail"
+    ],
+    "fields": [
+      "Bcc",
+      "Body",
+      "Cc",
+      "Description",
+      "From",
+      "FromEmailAccountDisplayName",
+      "FromEmailAccountID",
+      "Incoming",
+      "Internal",
+      "MailStatus",
+      "Owner",
+      "Parent",
+      "ParentSummary",
+      "StartDate",
+      "Subject",
+      "TimeActivity",
+      "To",
+      "Workgroup",
+      "CreatedByID",
+      "CreatedDateTime",
+      "LastModifiedDateTime",
+      "NoteID",
+      "RelatedEntityType",
+      "RelatedEntityNoteID",
+      "RelatedEntityDescription"
+    ],
+    "key_fields": [
+      "FromEmailAccountID",
+      "CreatedByID"
+    ]
+  },
+  "EmailProcessing": {
+    "actions": [
+      "ProcessAllEmailProcessing",
+      "ProcessEmailProcessing"
+    ],
+    "fields": [
+      "Account",
+      "AccountEmailAccountID",
+      "AssignedToMe",
+      "AssignedToOwner",
+      "IncludeFailed",
+      "Type"
+    ],
+    "expand": [
+      "Result"
+    ],
+    "key_fields": [
+      "AccountEmailAccountID",
+      "Type"
+    ]
+  },
+  "Employee": {
+    "actions": [
+      "ChangeEmployeeID"
+    ],
+    "fields": [
+      "ContactInfo",
+      "EmployeeID",
+      "EmployeeName",
+      "EmployeeSettings",
+      "FinancialSettings",
+      "LastModifiedDateTime",
+      "Status"
+    ],
+    "expand": [
+      "Attributes",
+      "Delegates",
+      "EmploymentHistory"
+    ],
+    "key_fields": [
+      "EmployeeID"
+    ],
+    "key_format": "Single value: <EmployeeID>",
+    "note": "May return 403 Forbidden if the Payroll module is not granted to the API service account."
+  },
+  "EmployeePayrollClass": {
+    "actions": [],
+    "fields": [
+      "Description",
+      "EmployeePayrollClassID",
+      "LastModifiedDateTime",
+      "PayrollDefaults"
+    ],
+    "key_fields": [
+      "EmployeePayrollClassID"
+    ]
+  },
+  "EmployeePayrollSettings": {
+    "actions": [
+      "ImportEmployeeTaxes"
+    ],
+    "fields": [
+      "Active",
+      "AddressInfo",
+      "CashAccount",
+      "ClassID",
+      "DeductionsAndBenefits",
+      "EmployeeID",
+      "EmployeeName",
+      "EmployeeType",
+      "EmploymentDates",
+      "GeneralInfo",
+      "GLAccounts",
+      "LastModifiedDateTime",
+      "PaidTimeOff",
+      "PaymentMethod",
+      "EmployeeTypeClassDefault",
+      "WorkLocations"
+    ],
+    "expand": [
+      "Compensation",
+      "DirectDepositDetails",
+      "EmploymentRecords",
+      "Taxes",
+      "TaxSettings"
+    ],
+    "key_fields": [
+      "ClassID",
+      "EmployeeID"
+    ]
+  },
+  "Event": {
+    "actions": [
+      "AcceptInvitationEvent",
+      "CancelActivityEvent",
+      "CompleteEvent",
+      "ExportCardEvent",
+      "InviteAllEvent",
+      "InviteEvent",
+      "RejectInvitationEvent"
+    ],
+    "fields": [
+      "AllDay",
+      "Body",
+      "Category",
+      "EndDate",
+      "EndTime",
+      "Internal",
+      "Location",
+      "NoteID",
+      "Priority",
+      "Reminder",
+      "ShowAs",
+      "StartDate",
+      "Status",
+      "Summary",
+      "TimeActivity",
+      "CreatedByID",
+      "CreatedDateTime",
+      "LastModifiedDateTime",
+      "RelatedEntityType",
+      "RelatedEntityNoteID",
+      "RelatedEntityDescription"
+    ],
+    "expand": [
+      "Attendees",
+      "RelatedActivities"
+    ],
+    "key_fields": [
+      "NoteID",
+      "CreatedByID"
+    ]
+  },
+  "ExpenseClaim": {
+    "actions": [
+      "ApproveExpenseClaim",
+      "PutOnHoldExpenseClaim",
+      "RejectExpenseClaim",
+      "ReleaseExpenseClaim",
+      "SubmitExpenseClaim"
+    ],
+    "expand": [
+      "Details"
+    ],
+    "fields": [
+      "ApprovalDate",
+      "BaseCurrencyID",
+      "ClaimedBy",
+      "ClaimTotal",
+      "CurrencyID",
+      "CurrencyRate",
+      "CustomerID",
+      "Date",
+      "DepartmentID",
+      "Description",
+      "FinancialDetails",
+      "LastModifiedDateTime",
+      "LocationID",
+      "ReciprocalRate",
+      "RefNbr",
+      "Status",
+      "TaxTotal",
+      "VATExemptTotal",
+      "VATTaxableTotal"
+    ],
+    "key_fields": [
+      "BaseCurrencyID",
+      "CurrencyID"
+    ]
+  },
+  "ExpenseReceipt": {
+    "actions": [
+      "ApproveExpenseReceipt",
+      "ClaimExpenseReceipt",
+      "PutOnHoldExpenseReceipt",
+      "RejectExpenseReceipt",
+      "SubmitExpenseReceipt"
+    ],
+    "fields": [
+      "Branch",
+      "ClaimAmount",
+      "ClaimedBy",
+      "Date",
+      "ExpenseItemID",
+      "LastModifiedDateTime",
+      "ReceiptDetails",
+      "ReceiptID",
+      "Status",
+      "TaxTotal"
+    ],
+    "expand": [
+      "TaxDetails"
+    ],
+    "key_fields": [
+      "ExpenseItemID",
+      "ReceiptID"
+    ]
+  },
+  "ExternalCommitment": {
+    "actions": [],
+    "fields": [
+      "AccountGroup",
+      "CommittedCOAmount",
+      "CommittedCOQty",
+      "CommittedInvoicedAmount",
+      "CommittedInvoicedQty",
+      "CommittedOpenAmount",
+      "CommittedOpenQty",
+      "CommittedReceivedQty",
+      "CostCode",
+      "ExternalRefNbr",
+      "InventoryID",
+      "LastModifiedDateTime",
+      "OriginalCommittedAmount",
+      "OriginalCommittedQty",
+      "ProjectID",
+      "ProjectTaskID",
+      "RelatedDocument",
+      "RevisedCommittedAmount",
+      "RevisedCommittedQty",
+      "Type",
+      "UOM"
+    ],
+    "key_fields": [
+      "ExternalRefNbr",
+      "InventoryID"
+    ]
+  },
+  "FOBPoint": {
+    "actions": [],
+    "fields": [
+      "Description",
+      "FOBPointID"
+    ],
+    "key_fields": [
+      "FOBPointID"
+    ]
+  },
+  "FinancialPeriod": {
+    "actions": [],
+    "fields": [
+      "CreatedDateTime",
+      "FinancialYear",
+      "LastModifiedDateTime",
+      "NbrOfPeriods",
+      "StartDate",
+      "UserDefinedPeriods"
+    ],
+    "expand": [
+      "Details"
+    ],
+    "key_fields": [
+      "FinancialYear"
+    ],
+    "key_format": "Single value: <FinancialYear>"
+  },
+  "FinancialYear": {
+    "actions": [],
+    "fields": [
+      "AdjustToPeriodStart",
+      "BelongsToNextYear",
+      "CreatedDateTime",
+      "DayOfWeek",
+      "FinancialYearStartsOn",
+      "FirstFinancialYear",
+      "FirstPeriodStartDate",
+      "HasAdjustmentPeriod",
+      "LastModifiedDateTime",
+      "LengthOfFinancialPeriodInDays",
+      "NbrOfFinancialPeriods",
+      "PeriodsStartDayOfWeek",
+      "PeriodType",
+      "UserDefinedPeriods",
+      "YearEndCalculationMethod"
+    ],
+    "expand": [
+      "Details"
+    ],
+    "key_fields": [
+      "PeriodType"
+    ]
+  },
+  "InventoryAdjustment": {
+    "actions": [
+      "ReleaseAdjustment"
+    ],
+    "expand": [
+      "Details"
+    ],
+    "fields": [
+      "Date",
+      "Description",
+      "ExternalRef",
+      "Hold",
+      "LastModifiedDateTime",
+      "ReferenceNbr",
+      "Status",
+      "TotalCost",
+      "TotalQty"
+    ],
+    "key_fields": [
+      "ReferenceNbr"
+    ],
+    "key_format": "Single value: <ReferenceNbr>"
+  },
+  "InventoryAllocationInquiry": {
+    "actions": [],
+    "fields": [
+      "Available",
+      "AvailableForIssue",
+      "AvailableForShipping",
+      "BaseUnit",
+      "InTransit",
+      "InTransitToSO",
+      "InventoryID",
+      "InventoryIssues",
+      "InventoryReceipts",
+      "KitAssemblyDemand",
+      "KitAssemblySupply",
+      "Location",
+      "OnHand",
+      "OnLocationNotAvailable",
+      "PurchaseForSO",
+      "PurchaseForSOPrepared",
+      "PurchaseOrders",
+      "PurchasePrepared",
+      "PurchaseReceipts",
+      "ReceiptsForSO",
+      "SOAllocated",
+      "SOBackOrdered",
+      "SOBooked",
+      "SOPrepared",
+      "SOShipped",
+      "SOToPurchase",
+      "TotalAddition",
+      "TotalDeduction",
+      "WarehouseID"
+    ],
+    "expand": [
+      "Results"
+    ],
+    "query_only": true,
+    "mandatory_filters": [
+      "InventoryID"
+    ]
+  },
+  "InventoryIssue": {
+    "actions": [
+      "ReleaseInventoryIssue"
+    ],
+    "expand": [
+      "Details"
+    ],
+    "fields": [
+      "ControlAmount",
+      "ControlQty",
+      "Date",
+      "Description",
+      "ExternalRef",
+      "LastModifiedDateTime",
+      "PostPeriod",
+      "ReferenceNbr",
+      "Status",
+      "TotalAmount",
+      "TotalCost",
+      "TotalQty"
+    ],
+    "key_fields": [
+      "ReferenceNbr"
+    ],
+    "key_format": "Single value: <ReferenceNbr>"
+  },
+  "InventoryQuantityAvailable": {
+    "actions": [],
+    "fields": [
+      "InventoryID",
+      "LastModifiedDateTime"
+    ],
+    "expand": [
+      "Results"
+    ],
+    "query_only": true,
+    "note": "May return 403 Forbidden if the API service account lacks access. Use InventorySummaryInquiry or ItemWarehouse instead."
+  },
+  "InventoryReceipt": {
+    "actions": [
+      "ReleaseInventoryReceipt"
+    ],
+    "expand": [
+      "Details"
+    ],
+    "fields": [
+      "ControlCost",
+      "ControlQty",
+      "Date",
+      "Description",
+      "Hold",
+      "LastModifiedDateTime",
+      "PostPeriod",
+      "ReferenceNbr",
+      "Status",
+      "TotalCost",
+      "TotalQty",
+      "TransferNbr"
+    ],
+    "key_fields": [
+      "ReferenceNbr"
+    ],
+    "key_format": "Single value: <ReferenceNbr>"
+  },
+  "InventorySummaryInquiry": {
+    "actions": [],
+    "fields": [
+      "ExpandByLotSerialNbr",
+      "InventoryID",
+      "LocationID",
+      "Subitem",
+      "WarehouseID"
+    ],
+    "expand": [
+      "Results"
+    ],
+    "query_only": true,
+    "mandatory_filters": [
+      "InventoryID"
+    ]
+  },
+  "Invoice": {
+    "actions": [
+      "ReleaseInvoice"
+    ],
+    "expand": [
+      "Details",
+      "TaxDetails",
+      "ApplicationHistory",
+      "Orders",
+      "DiscountDetails"
+    ],
+    "fields": [
+      "Amount",
+      "Balance",
+      "BillingPrinted",
+      "BillToContact",
+      "BillToContactOverride",
+      "CreatedDateTime",
+      "Customer",
+      "CustomerOrder",
+      "Date",
+      "Description",
+      "DueDate",
+      "Hold",
+      "LastModifiedDateTime",
+      "LinkARAccount",
+      "LinkBranch",
+      "LocationID",
+      "PostPeriod",
+      "Project",
+      "ReferenceNbr",
+      "Status",
+      "ShipToContact",
+      "ShipToContactOverride",
+      "IsTaxValid",
+      "TaxTotal",
+      "Terms",
+      "Type"
+    ],
+    "key_fields": [
+      "Type",
+      "ReferenceNbr"
+    ],
+    "key_format": "Slash-separated: <Type>/<ReferenceNbr>"
+  },
+  "ItemClass": {
+    "actions": [],
+    "fields": [
+      "AvailabilityCalculationRule",
+      "BaseUOM",
+      "ClassID",
+      "CountryOfOrigin",
+      "DefaultWarehouseID",
+      "Description",
+      "ItemType",
+      "LastModifiedDateTime",
+      "LotSerialClass",
+      "PostingClass",
+      "PriceClass",
+      "PurchaseUOM",
+      "SalesUOM",
+      "StockItem",
+      "TariffCode",
+      "TaxCategoryID",
+      "ValuationMethod"
+    ],
+    "expand": [
+      "Attributes"
+    ],
+    "key_fields": [
+      "ClassID"
+    ],
+    "key_format": "Single value: <ClassID>",
+    "note": "ClassIDs containing '/' (e.g. 'A/C') cannot be used as the get_record key - use the record GUID instead."
+  },
+  "ItemSalesCategory": {
+    "actions": [],
+    "fields": [
+      "CategoryID",
+      "Description",
+      "LastModifiedDateTime",
+      "ParentCategoryID",
+      "Path",
+      "SortOrder",
+      "NoteID"
+    ],
+    "expand": [
+      "Members"
+    ],
+    "key_fields": [
+      "CategoryID",
+      "ParentCategoryID"
+    ]
+  },
+  "ItemWarehouse": {
+    "actions": [],
+    "fields": [
+      "CreatedDateTime",
+      "DefaultIssueFrom",
+      "DefaultReceiptTo",
+      "DefaultSubitem",
+      "InventoryAccount",
+      "InventoryID",
+      "InventorySubaccount",
+      "LastModifiedDateTime",
+      "MaxQty",
+      "MSRP",
+      "OverrideInventoryAccountSubaccount",
+      "OverridePreferredVendor",
+      "OverridePrice",
+      "OverrideReplenishmentSettings",
+      "OverrideServiceLevel",
+      "OverrideStandardCost",
+      "OverrideProductManager",
+      "OverrideMaxQty",
+      "OverrideReorderPoint",
+      "OverrideSafetyStock",
+      "PreferredLocation",
+      "PreferredVendor",
+      "ProductManager",
+      "ProductWorkgroup",
+      "ReorderPoint",
+      "ReplenishmentClass",
+      "ReplenishmentMethod",
+      "ReplenishmentSource",
+      "ReplenishmentWarehouse",
+      "SafetyStock",
+      "Seasonality",
+      "ServiceLevel",
+      "Status",
+      "WarehouseID"
+    ],
+    "key_fields": [
+      "InventoryID",
+      "WarehouseID"
+    ],
+    "key_format": "Slash-separated: <InventoryID>/<WarehouseID>",
+    "note": "ALWAYS pass select= with specific fields - full records are very large."
+  },
+  "JournalTransaction": {
+    "actions": [
+      "ReleaseJournalTransaction"
+    ],
+    "expand": [
+      "Details"
+    ],
+    "fields": [
+      "BatchNbr",
+      "BranchID",
+      "CreatedDateTime",
+      "CurrencyID",
+      "Description",
+      "Hold",
+      "LastModifiedDateTime",
+      "LedgerID",
+      "Module",
+      "PostPeriod",
+      "Status",
+      "TransactionDate"
+    ],
+    "key_fields": [
+      "Module",
+      "BatchNbr"
+    ],
+    "key_format": "Slash-separated: <Module>/<BatchNbr>",
+    "note": "$select is not honored on this entity - pull records and pick fields client-side."
+  },
+  "KitAssembly": {
+    "actions": [
+      "ReleaseKitAssembly"
+    ],
+    "expand": [
+      "Details"
+    ],
+    "fields": [
+      "Date",
+      "Description",
+      "Hold",
+      "KitInventoryID",
+      "LocationID",
+      "PostPeriod",
+      "Qty",
+      "LastModifiedDateTime",
+      "ReasonCode",
+      "ReferenceNbr",
+      "Revision",
+      "Status",
+      "Subitem",
+      "Type",
+      "UOM",
+      "WarehouseID"
+    ],
+    "key_fields": [
+      "KitInventoryID",
+      "LocationID"
+    ]
+  },
+  "KitSpecification": {
+    "actions": [],
+    "fields": [
+      "Active",
+      "Description",
+      "IsNonStock",
+      "KitInventoryID",
+      "LastModifiedDateTime",
+      "RevisionID"
+    ],
+    "expand": [
+      "NonStockComponents",
+      "StockComponents"
+    ],
+    "key_fields": [
+      "KitInventoryID",
+      "RevisionID"
+    ]
+  },
+  "LaborCostRate": {
+    "actions": [],
+    "fields": [
+      "EffectiveDate",
+      "Employee",
+      "LaborItem",
+      "Project",
+      "ProjectTask",
+      "LaborRateType",
+      "UnionLocal"
+    ],
+    "expand": [
+      "Results"
+    ],
+    "key_fields": [
+      "LaborRateType"
+    ]
+  },
+  "Lead": {
+    "actions": [
+      "CheckLeadForDuplicates",
+      "ConvertLeadToBAccount",
+      "ConvertLeadToContact",
+      "ConvertLeadToOpportunity",
+      "MarkLeadAsValidated",
+      "ValidateLeadAddress"
+    ],
+    "fields": [
+      "Address",
+      "BusinessAccount",
+      "CompanyName",
+      "ContactMethod",
+      "DoNotCall",
+      "DoNotEmail",
+      "DoNotFax",
+      "DoNotMail",
+      "Duplicate",
+      "DuplicateFound",
+      "Email",
+      "Fax",
+      "FaxType",
+      "FirstName",
+      "JobTitle",
+      "LanguageOrLocale",
+      "LastIncomingActivity",
+      "LastName",
+      "LastOutgoingActivity",
+      "LeadClass",
+      "LeadDisplayName",
+      "LeadID",
+      "NoMarketing",
+      "NoMassMail",
+      "Owner",
+      "OwnerEmployeeName",
+      "ParentAccount",
+      "Phone1",
+      "Phone1Type",
+      "Phone2",
+      "Phone2Type",
+      "Phone3",
+      "Phone3Type",
+      "Reason",
+      "Source",
+      "SourceCampaign",
+      "Status",
+      "Title",
+      "WebSite",
+      "Workgroup",
+      "WorkgroupDescription",
+      "LastModifiedDateTime",
+      "NoteID",
+      "Active",
+      "Description",
+      "RefContactID",
+      "ConvertedBy",
+      "QualificationDate"
+    ],
+    "expand": [
+      "Activities",
+      "Attributes",
+      "Campaigns",
+      "Duplicates",
+      "MarketingLists",
+      "Relations"
+    ],
+    "key_fields": [
+      "LeadID"
+    ],
+    "key_format": "Single value: <LeadID>",
+    "note": "May return 403 Forbidden if the CRM module is not granted to the API service account."
+  },
+  "Ledger": {
+    "actions": [],
+    "fields": [
+      "ConsolidationSource",
+      "Currency",
+      "Description",
+      "LastModifiedDateTime",
+      "LedgerID",
+      "Type"
+    ],
+    "expand": [
+      "Branches",
+      "Companies"
+    ],
+    "key_fields": [
+      "LedgerID"
+    ],
+    "key_format": "Single value: <LedgerID>"
+  },
+  "LotSerialClass": {
+    "actions": [],
+    "fields": [
+      "AssignmentMethod",
+      "ClassID",
+      "Description",
+      "IssueMethod",
+      "TrackExpirationDate",
+      "TrackingMethod"
+    ],
+    "expand": [
+      "Segments"
+    ],
+    "key_fields": [
+      "ClassID"
+    ]
+  },
+  "NonStockItem": {
+    "actions": [
+      "UpdateStandardCostNonStockItem"
+    ],
+    "expand": [
+      "VendorDetails",
+      "CrossReferences",
+      "UOMConversions"
+    ],
+    "fields": [
+      "BaseUnit",
+      "CurrentCost",
+      "DefaultPrice",
+      "DeferralAccount",
+      "DeferralSubaccount",
+      "Description",
+      "EffectiveDate",
+      "ExpenseAccount",
+      "ExpenseAccrualAccount",
+      "ExpenseAccrualSubaccount",
+      "ExpenseSubaccount",
+      "InventoryID",
+      "IsKit",
+      "IsAKit",
+      "ItemClass",
+      "ItemStatus",
+      "ItemType",
+      "LastCost",
+      "LastModifiedDateTime",
+      "PendingCost",
+      "PendingCostDate",
+      "POAccrualAccount",
+      "POAccrualSubaccount",
+      "PostingClass",
+      "PriceClass",
+      "PurchasePriceVarianceAccount",
+      "PurchasePriceVarianceSubaccount",
+      "PurchaseUnit",
+      "ReasonCodeSubaccount",
+      "RequireReceipt",
+      "RequireShipment",
+      "SalesAccount",
+      "SalesSubaccount",
+      "SalesUnit",
+      "TaxCategory",
+      "Volume",
+      "VolumeUOM",
+      "Weight",
+      "WeightUOM",
+      "CurySpecificMSRP",
+      "CurySpecificPrice",
+      "Availability",
+      "ExportToExternal",
+      "Content",
+      "CurrentStdCost",
+      "CustomURL",
+      "DimensionWeight",
+      "MetaDescription",
+      "MetaKeywords",
+      "MSRP",
+      "NoteID",
+      "PageTitle",
+      "SearchKeywords",
+      "TemplateItemID",
+      "Visibility"
+    ],
+    "key_fields": [
+      "InventoryID"
+    ],
+    "key_format": "Single value: <InventoryID>"
+  },
+  "Opportunity": {
+    "actions": [
+      "CreateAccountFromOpportunity",
+      "CreateContactFromOpportunity",
+      "CreateOpportunityInvoice",
+      "CreateOpportunitySalesOrder"
+    ],
+    "expand": [
+      "Contacts",
+      "Products",
+      "Activities"
+    ],
+    "fields": [
+      "Address",
+      "Amount",
+      "Branch",
+      "BusinessAccount",
+      "ClassID",
+      "ContactDisplayName",
+      "ContactID",
+      "ContactInformation",
+      "ConvertedLeadDisplayName",
+      "ConvertedLeadID",
+      "CurrencyID",
+      "CurrencyViewState",
+      "Details",
+      "Discount",
+      "Estimation",
+      "Location",
+      "ManualAmount",
+      "OpportunityID",
+      "Override",
+      "Owner",
+      "OwnerEmployeeName",
+      "ParentAccount",
+      "Project",
+      "Reason",
+      "Source",
+      "SourceCampaign",
+      "Stage",
+      "Status",
+      "Subject",
+      "TaxZone",
+      "Total",
+      "WeightTotal",
+      "WorkgroupDescription",
+      "WorkgroupID",
+      "LastModifiedDateTime",
+      "NoteID"
+    ],
+    "key_fields": [
+      "OpportunityID"
+    ],
+    "key_format": "Single value: <OpportunityID>",
+    "note": "May return 403 Forbidden if the CRM module is not granted to the API service account."
+  },
+  "PTOBank": {
+    "actions": [],
+    "fields": [
+      "AccrualMethod",
+      "AccrueonCertifiedJobOnly",
+      "Active",
+      "ApplyBandingRules",
+      "BandingRules",
+      "CarryoverType",
+      "CreateFinTransactions",
+      "DefaultDisbursingType",
+      "Description",
+      "DisbursingEarningType",
+      "GLAccounts",
+      "LastModifiedDateTime",
+      "OnSettlement",
+      "PTOBankID",
+      "TransferDate",
+      "TransferDateDay",
+      "TransferDateMonth",
+      "TransferDateType"
+    ],
+    "expand": [
+      "EmployeeClassSettings"
+    ],
+    "key_fields": [
+      "CarryoverType",
+      "DefaultDisbursingType"
+    ]
+  },
+  "PayGroup": {
+    "actions": [],
+    "fields": [
+      "BenefitExpenseAccount",
+      "BenefitExpenseSub",
+      "BenefitLiabilityAccount",
+      "BenefitLiabilitySub",
+      "DeductionLiabilityAccount",
+      "DeductionLiabilitySub",
+      "EarningsAccount",
+      "EarningsSub",
+      "IsDefault",
+      "LastModifiedDateTime",
+      "PayGroupID",
+      "PayGroupName",
+      "PTOAssetAccount",
+      "PTOAssetSub",
+      "PTOExpenseAccount",
+      "PTOExpenseSub",
+      "PTOLiabilityAccount",
+      "PTOLiabilitySub",
+      "TaxExpenseAccount",
+      "TaxExpenseSub",
+      "TaxLiabilityAccount",
+      "TaxLiabilitySub",
+      "UserRole"
+    ],
+    "key_fields": [
+      "PayGroupID"
+    ]
+  },
+  "PayPeriod": {
+    "actions": [],
+    "fields": [
+      "LastModifiedDateTime",
+      "NumberofPeriods",
+      "Override",
+      "PayGroup",
+      "StartDate",
+      "Year"
+    ],
+    "expand": [
+      "PaymentPeriods"
+    ],
+    "key_fields": []
+  },
+  "Payment": {
+    "actions": [
+      "CaptureCreditCardPayment",
+      "CardOperation",
+      "ReleasePayment",
+      "VoidCardPayment",
+      "VoidPayment"
+    ],
+    "expand": [
+      "ApplicationHistory",
+      "OrdersToApply",
+      "CreditCardsProcessingInfo"
+    ],
+    "fields": [
+      "ApplicationDate",
+      "AppliedToDocuments",
+      "Branch",
+      "CardAccountNbr",
+      "CashAccount",
+      "CurrencyID",
+      "CustomerID",
+      "Description",
+      "Hold",
+      "IsCCPayment",
+      "PaymentAmount",
+      "PaymentMethod",
+      "PaymentRef",
+      "ReferenceNbr",
+      "Status",
+      "Type",
+      "LastModifiedDateTime",
+      "ProcessingCenterID",
+      "SaveCard",
+      "ExternalRef",
+      "OrigTransaction",
+      "BranchID",
+      "CustomerLocationID",
+      "IsNewCard",
+      "NoteID",
+      "AvailableBalance",
+      "AppliedToOrders"
+    ],
+    "key_fields": [
+      "Type",
+      "ReferenceNbr"
+    ],
+    "key_format": "Slash-separated: <Type>/<ReferenceNbr>"
+  },
+  "PaymentMethod": {
+    "actions": [],
+    "fields": [
+      "Active",
+      "CreatedDateTime",
+      "Description",
+      "IntegratedProcessing",
+      "LastModifiedDateTime",
+      "MeansOfPayment",
+      "PaymentMethodID",
+      "RequireRemittanceInformationforCashAccount",
+      "UseInAP",
+      "UseInAR",
+      "UseInPR",
+      "SetPaymentDatetoBankTransactionDate",
+      "SettingsForPR"
+    ],
+    "expand": [
+      "AllowedCashAccounts",
+      "ProcessingCenters"
+    ],
+    "key_fields": [
+      "PaymentMethodID"
+    ]
+  },
+  "PayrollBatch": {
+    "actions": [
+      "ReleaseBatch"
+    ],
+    "fields": [
+      "BatchID",
+      "Description",
+      "Hold",
+      "LastModifiedDateTime",
+      "NumberofEmployees",
+      "OvertimeRules",
+      "PayGroup",
+      "PayPeriod",
+      "TotalEarnings",
+      "TotalHourQty",
+      "PayrollType",
+      "PeriodEnd",
+      "PeriodStart",
+      "Status",
+      "TransactionDate"
+    ],
+    "expand": [
+      "DeductionsAndBenefitsDetails",
+      "EarningDetails",
+      "EmployeeSummary"
+    ],
+    "key_fields": [
+      "BatchID",
+      "PayrollType"
+    ]
+  },
+  "PayrollUnionLocal": {
+    "actions": [],
+    "fields": [
+      "Active",
+      "Description",
+      "LastModifiedDateTime",
+      "Location",
+      "PayrollUnionLocalID",
+      "Vendor"
+    ],
+    "expand": [
+      "DeductionsAndBenefits",
+      "EarningRates"
+    ],
+    "key_fields": [
+      "PayrollUnionLocalID"
+    ]
+  },
+  "PayrollWCCCode": {
+    "actions": [],
+    "fields": [
+      "Country"
+    ],
+    "expand": [
+      "WCCCodes"
+    ],
+    "key_fields": []
+  },
+  "PhysicalInventoryCount": {
+    "actions": [],
+    "fields": [
+      "InventoryID",
+      "Location",
+      "LotSerialNbr",
+      "ReferenceNbr",
+      "Subitem"
+    ],
+    "expand": [
+      "Details"
+    ],
+    "query_only": true,
+    "mandatory_filters": [
+      "InventoryID",
+      "Location",
+      "LotSerialNbr"
+    ]
+  },
+  "PhysicalInventoryReview": {
+    "actions": [
+      "CancelPhysicalInventory",
+      "CompletePhysicalInventory",
+      "FinishCountingPhysicalInventory"
+    ],
+    "fields": [
+      "CreatedDateTime",
+      "Description",
+      "FreezeDate",
+      "ReferenceNbr",
+      "Status",
+      "TotalPhysicalQty",
+      "TotalVarianceCost",
+      "TotalVarianceQty",
+      "TypeID",
+      "WarehouseID"
+    ],
+    "expand": [
+      "Details"
+    ],
+    "key_fields": [
+      "ReferenceNbr"
+    ],
+    "key_format": "Single value: <ReferenceNbr>"
+  },
+  "ProFormaInvoice": {
+    "actions": [
+      "ApproveProFormaInvoice",
+      "EmailProFormaInvoice",
+      "HoldProFormaInvoice",
+      "RejectProFormaInvoice",
+      "ReleaseProFormaInvoice",
+      "RemoveProFormaInvoiceFromHold"
+    ],
+    "fields": [
+      "AmountDue",
+      "BillingSettings",
+      "CurrencyID",
+      "CustomerID",
+      "Description",
+      "EffectiveDate",
+      "ExternalRefNbr",
+      "FinancialDetails",
+      "Hold",
+      "InvoiceDate",
+      "InvoiceTotal",
+      "LastModifiedDateTime",
+      "Location",
+      "PostPeriod",
+      "ProgressBillingTotal",
+      "ProjectID",
+      "RefNbr",
+      "RetainageTotal",
+      "Status",
+      "TaxTotal",
+      "TimeAndMaterialTotal"
+    ],
+    "expand": [
+      "ApprovalDetails",
+      "ProgressBilling",
+      "TaxDetails",
+      "TimeAndMaterial"
+    ],
+    "key_fields": [
+      "CurrencyID",
+      "CustomerID"
+    ]
+  },
+  "Project": {
+    "actions": [
+      "ActivateProject",
+      "ApproveProject",
+      "CancelProject",
+      "ChangeProjectID",
+      "CompleteProject",
+      "HoldProject",
+      "LockProjectBudget",
+      "LockProjectCommitments",
+      "RejectProject",
+      "RunProjectAllocation",
+      "RunProjectBilling",
+      "SuspendProject",
+      "UnlockProjectBudget",
+      "UnlockProjectCommitments",
+      "ValidateProjectBalance"
+    ],
+    "expand": [
+      "Tasks",
+      "Employees",
+      "Equipment",
+      "Activities",
+      "UnionLocals",
+      "ProFormaDetails"
+    ],
+    "fields": [
+      "Assets",
+      "BillingAndAllocationSettings",
+      "BillToSettings",
+      "Customer",
+      "Description",
+      "Expenses",
+      "ExternalRefNbr",
+      "GLAccounts",
+      "Hold",
+      "Income",
+      "LastModifiedDateTime",
+      "Liabilities",
+      "ProjectID",
+      "ProjectProperties",
+      "ProjectTemplateID",
+      "Status",
+      "VisibilitySettings",
+      "Retainage",
+      "ProjectAddress"
+    ],
+    "key_fields": [
+      "ExternalRefNbr",
+      "ProjectID"
+    ]
+  },
+  "ProjectBudget": {
+    "actions": [],
+    "expand": [],
+    "fields": [
+      "AccountGroup",
+      "ActualAmount",
+      "ActualPlusOpenCommittedAmount",
+      "ActualQty",
+      "AutoCompleted",
+      "BudgetedCOAmount",
+      "BudgetedCOQty",
+      "CommittedCOAmount",
+      "CommittedCOQty",
+      "CommittedInvoicedAmount",
+      "CommittedInvoicedQty",
+      "CommittedOpenAmount",
+      "CommittedOpenQty",
+      "CommittedReceivedQty",
+      "Completed",
+      "CostAtCompletion",
+      "CostCode",
+      "CostToComplete",
+      "Description",
+      "DraftInvoicesAmount",
+      "InventoryID",
+      "LastCostAtCompletion",
+      "LastCostToComplete",
+      "LastModifiedDateTime",
+      "LastPercentageOfCompletion",
+      "OriginalBudgetedAmount",
+      "OriginalBudgetedQty",
+      "OriginalCommittedAmount",
+      "OriginalCommittedQty",
+      "PendingInvoiceAmount",
+      "PercentageOfCompletion",
+      "Performance",
+      "ProjectID",
+      "ProjectTaskID",
+      "Retainage",
+      "RevenueTask",
+      "RevisedBudgetedAmount",
+      "RevisedBudgetedQty",
+      "RevisedCommittedAmount",
+      "RevisedCommittedQty",
+      "TaxCategory",
+      "Type",
+      "UnitRate",
+      "UOM",
+      "VarianceAmount"
+    ],
+    "key_fields": [
+      "InventoryID",
+      "ProjectID"
+    ]
+  },
+  "ProjectTask": {
+    "actions": [
+      "ActivateProjectTask",
+      "CancelProjectTask",
+      "CompleteProjectTask",
+      "HoldProjectTask"
+    ],
+    "expand": [],
+    "fields": [
+      "BillingAndAllocationSettings",
+      "CRMLink",
+      "Default",
+      "DefaultValues",
+      "Description",
+      "ExternalRefNbr",
+      "LastModifiedDateTime",
+      "ProjectID",
+      "ProjectTaskID",
+      "Properties",
+      "Status",
+      "VisibilitySettings"
+    ],
+    "key_fields": [
+      "ExternalRefNbr",
+      "ProjectID"
+    ]
+  },
+  "ProjectTemplate": {
+    "actions": [
+      "ActivateProjectTemplate",
+      "HoldProjectTemplate"
+    ],
+    "fields": [
+      "BillingAndAllocationSettings",
+      "Description",
+      "GLAccounts",
+      "LastModifiedDateTime",
+      "ProjectProperties",
+      "ProjectTemplateID",
+      "Status",
+      "VisibilitySettings"
+    ],
+    "expand": [
+      "Attributes",
+      "Employees",
+      "Equipments"
+    ],
+    "key_fields": [
+      "ProjectTemplateID"
+    ]
+  },
+  "ProjectTemplateTask": {
+    "actions": [],
+    "fields": [
+      "BillingAndAllocationSettings",
+      "DefaultValues",
+      "Description",
+      "LastModifiedDateTime",
+      "ProjectTemplateID",
+      "ProjectTemplateTaskID",
+      "Properties",
+      "VisibilitySettings"
+    ],
+    "expand": [
+      "Attributes"
+    ],
+    "key_fields": [
+      "ProjectTemplateID",
+      "ProjectTemplateTaskID"
+    ]
+  },
+  "ProjectTransaction": {
+    "actions": [
+      "ReleaseTransactions"
+    ],
+    "fields": [
+      "CreatedDateTime",
+      "Description",
+      "LastModifiedDateTime",
+      "Module",
+      "OriginalDocNbr",
+      "OriginalDocType",
+      "ReferenceNbr",
+      "Status",
+      "TotalAmount",
+      "TotalBillableQty",
+      "TotalQty"
+    ],
+    "expand": [
+      "Details"
+    ],
+    "key_fields": [
+      "Module",
+      "OriginalDocNbr"
+    ]
+  },
+  "PurchaseOrder": {
+    "actions": [],
+    "expand": [
+      "Details",
+      "Shipments"
+    ],
+    "fields": [
+      "BaseCurrencyID",
+      "Branch",
+      "ControlTotal",
+      "CurrencyID",
+      "CurrencyEffectiveDate",
+      "CurrencyRate",
+      "CurrencyRateTypeID",
+      "CurrencyReciprocalRate",
+      "Date",
+      "Description",
+      "Hold",
+      "IsTaxValid",
+      "LastModifiedDateTime",
+      "LineTotal",
+      "Location",
+      "OrderNbr",
+      "OrderTotal",
+      "Owner",
+      "Project",
+      "PromisedOn",
+      "ShippingInstructions",
+      "Status",
+      "TaxTotal",
+      "Terms",
+      "Type",
+      "VendorID",
+      "VendorRef",
+      "VendorTaxZone"
+    ],
+    "key_fields": [
+      "Type",
+      "OrderNbr"
+    ],
+    "key_format": "Slash-separated: <Type>/<OrderNbr>"
+  },
+  "PurchaseReceipt": {
+    "actions": [
+      "CreateAPBill",
+      "ReleasePurchaseReceipt"
+    ],
+    "expand": [
+      "Details"
+    ],
+    "fields": [
+      "BaseCurrencyID",
+      "BillDate",
+      "Branch",
+      "ControlQty",
+      "CreateBill",
+      "CurrencyID",
+      "CurrencyEffectiveDate",
+      "CurrencyRate",
+      "CurrencyRateTypeID",
+      "CurrencyReciprocalRate",
+      "Date",
+      "Hold",
+      "InventoryRefNbr",
+      "LastModifiedDateTime",
+      "Location",
+      "PostPeriod",
+      "ProcessReturnWithOriginalCost",
+      "ReceiptNbr",
+      "Status",
+      "TotalCost",
+      "TotalQty",
+      "Type",
+      "UnbilledQuantity",
+      "VendorID",
+      "VendorRef",
+      "Warehouse"
+    ],
+    "key_fields": [
+      "Type",
+      "ReceiptNbr"
+    ],
+    "key_format": "Slash-separated: <Type>/<ReceiptNbr>"
+  },
+  "SalesInvoice": {
+    "actions": [
+      "ReleaseSalesInvoice"
+    ],
+    "expand": [
+      "Details",
+      "TaxDetails",
+      "ApplicationHistory",
+      "DiscountDetails"
+    ],
+    "fields": [
+      "Amount",
+      "Balance",
+      "BillingSettings",
+      "CashDiscount",
+      "Commissions",
+      "CreditHold",
+      "Currency",
+      "CustomerID",
+      "CustomerOrder",
+      "Date",
+      "Description",
+      "DetailTotal",
+      "DiscountTotal",
+      "DueDate",
+      "IsTaxValid",
+      "FinancialDetails",
+      "FreightPrice",
+      "Hold",
+      "LastModifiedDateTime",
+      "PaymentTotal",
+      "Project",
+      "ReferenceNbr",
+      "Status",
+      "TaxTotal",
+      "Type",
+      "VATExemptTotal",
+      "VATTaxableTotal",
+      "BillToAddress",
+      "BillToAddressOverride",
+      "BillToContact",
+      "BillToContactOverride",
+      "CreatedDate",
+      "ExternalRef",
+      "LastModifiedDate",
+      "ShipToAddress",
+      "ShipToAddressOverride",
+      "ShipToContact",
+      "ShipToContactOverride",
+      "TaxCalcMode"
+    ],
+    "key_fields": [
+      "Type",
+      "ReferenceNbr"
+    ],
+    "key_format": "Slash-separated: <Type>/<ReferenceNbr>"
+  },
+  "SalesOrder": {
+    "actions": [
+      "AutoRecalculateDiscounts",
+      "CancelSalesOrder",
+      "OpenSalesOrder",
+      "PrepareSalesInvoice",
+      "RecalculatePricesDiscounts",
+      "ReleaseFromCreditHoldSalesOrder",
+      "ReopenSalesOrder",
+      "SalesOrderCreateReceipt",
+      "SalesOrderCreateShipment"
+    ],
+    "expand": [
+      "Details",
+      "Shipments",
+      "Payments",
+      "DiscountDetails"
+    ],
+    "fields": [
+      "Approved",
+      "BaseCurrencyID",
+      "BillToAddress",
+      "BillToAddressOverride",
+      "BillToAddressValidated",
+      "BillToContact",
+      "BillToContactOverride",
+      "Branch",
+      "CashAccount",
+      "Commissions",
+      "ContactID",
+      "ControlTotal",
+      "CreditHold",
+      "CurrencyID",
+      "CurrencyRate",
+      "CurrencyRateTypeID",
+      "CustomerID",
+      "CustomerOrder",
+      "Date",
+      "Description",
+      "DestinationWarehouseID",
+      "DisableAutomaticDiscountUpdate",
+      "DisableAutomaticTaxCalculation",
+      "EffectiveDate",
+      "ExternalRef",
+      "FinancialSettings",
+      "Hold",
+      "IsTaxValid",
+      "LastModified",
+      "LocationID",
+      "MaxRiskScore",
+      "OrderedQty",
+      "OrderNbr",
+      "OrderTotal",
+      "OrderType",
+      "PaymentMethod",
+      "PreferredWarehouseID",
+      "Project",
+      "ReciprocalRate",
+      "RequestedOn",
+      "ShippingSettings",
+      "ShipToAddress",
+      "ShipToAddressOverride",
+      "ShipToAddressValidated",
+      "ShipToContact",
+      "ShipToContactOverride",
+      "ShipVia",
+      "Status",
+      "TaxTotal",
+      "Totals",
+      "VATExemptTotal",
+      "VATTaxableTotal",
+      "ExternalOrderOriginal",
+      "ExternalRefundRef",
+      "WillCall",
+      "PaymentRef",
+      "NoteID",
+      "ExternalOrderOrigin",
+      "ExternalOrderSource",
+      "TaxCalcMode",
+      "CreatedDate"
+    ],
+    "key_fields": [
+      "OrderType",
+      "OrderNbr"
+    ],
+    "key_format": "Slash-separated: <OrderType>/<OrderNbr>"
+  },
+  "SalesPriceWorksheet": {
+    "actions": [
+      "ReleaseSalesPriceWorksheet"
+    ],
+    "fields": [
+      "CreatedDateTime",
+      "Description",
+      "EffectiveDate",
+      "ExpirationDate",
+      "Hold",
+      "LastModifiedDateTime",
+      "OverwriteOverlappingPrices",
+      "ReferenceNbr",
+      "Status"
+    ],
+    "expand": [
+      "SalesPrices"
+    ],
+    "key_fields": [
+      "ReferenceNbr"
+    ]
+  },
+  "SalesPricesInquiry": {
+    "actions": [],
+    "fields": [
+      "EffectiveAsOf",
+      "InventoryID",
+      "ItemClassID",
+      "PriceClass",
+      "PriceCode",
+      "PriceManager",
+      "PriceManagerIsMe",
+      "PriceType",
+      "PriceWorkgroup",
+      "PriceWorkgroupIsMine",
+      "TaxCalculationMode"
+    ],
+    "expand": [
+      "SalesPriceDetails"
+    ],
+    "query_only": true,
+    "note": "Often NON-FUNCTIONAL via REST - queries (even filtered) tend to return 500 CannotOptimizeException. For pricing read StockItem/NonStockItem fields (DefaultPrice, MSRP, LastCost, AverageCost) instead."
+  },
+  "Salesperson": {
+    "actions": [],
+    "fields": [
+      "CreatedDateTime",
+      "DefaultCommission",
+      "IsActive",
+      "LastModifiedDateTime",
+      "Name",
+      "SalespersonID",
+      "SalesSubaccount"
+    ],
+    "key_fields": [
+      "SalespersonID"
+    ]
+  },
+  "ServiceOrder": {
+    "actions": [
+      "AllowBilling",
+      "CancelOrder",
+      "CloseOrder",
+      "CompleteOrder",
+      "InvoiceOrder",
+      "RecalcExternalTax",
+      "ReopenOrder",
+      "UncloseOrder"
+    ],
+    "expand": [
+      "Details",
+      "Staff",
+      "ResourceEquipment"
+    ],
+    "fields": [
+      "Address",
+      "AppointmentDuration",
+      "AppointmentsNeeded",
+      "BillableTotal",
+      "BranchLocation",
+      "Contact",
+      "ContractInfo",
+      "Currency",
+      "Customer",
+      "CustomerOrder",
+      "Date",
+      "DefaultProjectTask",
+      "Description",
+      "EstimatedDuration",
+      "ExternalReference",
+      "FinancialDetails",
+      "Hold",
+      "LastModifiedDateTime",
+      "Location",
+      "OtherInformation",
+      "Override",
+      "Priority",
+      "Problem",
+      "Project",
+      "ServiceOrderNbr",
+      "ServiceOrderTotal",
+      "ServiceOrderType",
+      "Severity",
+      "SLA",
+      "SLATime",
+      "Status",
+      "Supervisor",
+      "TaxTotal",
+      "Totals",
+      "WaitingforPurchasedItems",
+      "WorkflowStage"
+    ],
+    "key_fields": [
+      "SrvOrdType",
+      "RefNbr"
+    ],
+    "key_format": "Slash-separated: <SrvOrdType>/<RefNbr>",
+    "note": "May return 403 Forbidden if the Field Service module is not granted to the API service account."
+  },
+  "ShipVia": {
+    "actions": [],
+    "fields": [
+      "CalculationMethod",
+      "Calendar",
+      "CarrierID",
+      "CommonCarrier",
+      "Description",
+      "FreightExpenseAccount",
+      "FreightExpenseSubaccount",
+      "FreightSalesAccount",
+      "FreightSalesSubaccount",
+      "TaxCategory"
+    ],
+    "expand": [
+      "FreightRates",
+      "Packages"
+    ],
+    "key_fields": [
+      "CarrierID"
+    ]
+  },
+  "Shipment": {
+    "actions": [
+      "ConfirmShipment",
+      "CorrectShipment",
+      "PrepareInvoice",
+      "UpdateIN"
+    ],
+    "expand": [
+      "Details",
+      "Orders",
+      "Packages"
+    ],
+    "fields": [
+      "BaseCurrencyID",
+      "ControlQty",
+      "CreatedDateTime",
+      "CurrencyRate",
+      "CurrencyRateTypeID",
+      "CurrencyViewState",
+      "CustomerID",
+      "CreateNewShipmentForEveryOrder",
+      "Description",
+      "EffectiveDate",
+      "FOBPoint",
+      "OverrideFreightPrice",
+      "FreightPrice",
+      "FreightCost",
+      "FreightCurrencyID",
+      "GroundCollect",
+      "Hold",
+      "Insurance",
+      "LastModifiedDateTime",
+      "LocationID",
+      "Operation",
+      "Owner",
+      "PackageCount",
+      "PackageWeight",
+      "Picked",
+      "ReciprocalRate",
+      "ResidentialDelivery",
+      "SaturdayDelivery",
+      "ShipmentDate",
+      "ShipmentNbr",
+      "ShippedQty",
+      "ShippedVolume",
+      "ShippedWeight",
+      "ShippingSettings",
+      "ShippingTerms",
+      "ShippingZoneID",
+      "ShipVia",
+      "Status",
+      "ToWarehouseID",
+      "Type",
+      "UnlimitedPackages",
+      "UseCustomersAccount",
+      "WarehouseID",
+      "WorkgroupID",
+      "NoteID"
+    ],
+    "key_fields": [
+      "ShipmentNbr"
+    ],
+    "key_format": "Single value: <ShipmentNbr>"
+  },
+  "ShippingBox": {
+    "actions": [],
+    "fields": [
+      "ActiveByDefault",
+      "BoxID",
+      "BoxWeight",
+      "CarriersPackage",
+      "Description",
+      "Height",
+      "Length",
+      "MaxVolume",
+      "MaxWeight",
+      "VolumeUOM",
+      "WeightUOM",
+      "Width",
+      "LinearUOM"
+    ],
+    "key_fields": [
+      "BoxID"
+    ]
+  },
+  "ShippingTerm": {
+    "actions": [],
+    "fields": [
+      "Description",
+      "TermID"
+    ],
+    "expand": [
+      "Details"
+    ],
+    "key_fields": [
+      "TermID"
+    ]
+  },
+  "ShippingZones": {
+    "actions": [],
+    "fields": [
+      "Description",
+      "ZoneID"
+    ],
+    "key_fields": [
+      "ZoneID"
+    ]
+  },
+  "ShopifyStore": {
+    "actions": [],
+    "fields": [
+      "AccessToken",
+      "Active",
+      "Connector",
+      "Default",
+      "SharedSecret",
+      "StoreAdminURL",
+      "StoreName"
+    ],
+    "key_fields": []
+  },
+  "StockItem": {
+    "actions": [
+      "UpdateStandardCostStockItem"
+    ],
+    "expand": [
+      "WarehouseDetails",
+      "VendorDetails",
+      "CrossReferences",
+      "UOMConversions"
+    ],
+    "fields": [
+      "ABCCode",
+      "AutoIncrementalValue",
+      "AverageCost",
+      "BaseUOM",
+      "COGSAccount",
+      "COGSSubaccount",
+      "Content",
+      "CountryOfOrigin",
+      "CurrentStdCost",
+      "DefaultIssueLocationID",
+      "DefaultPrice",
+      "DefaultReceiptLocationID",
+      "DefaultSubitem",
+      "DefaultWarehouseID",
+      "DeferralAccount",
+      "DeferralSubaccount",
+      "Description",
+      "DimensionVolume",
+      "DimensionWeight",
+      "DiscountAccount",
+      "DiscountSubaccount",
+      "ImageUrl",
+      "InventoryAccount",
+      "InventoryID",
+      "InventorySubaccount",
+      "IsAKit",
+      "ItemClass",
+      "ItemStatus",
+      "ItemType",
+      "LandedCostVarianceAccount",
+      "LandedCostVarianceSubaccount",
+      "LastCost",
+      "LastModified",
+      "LastModifiedDateTime",
+      "LastStdCost",
+      "LotSerialClass",
+      "Markup",
+      "MaxCost",
+      "MinCost",
+      "MinMarkup",
+      "MSRP",
+      "PackagingOption",
+      "PackSeparately",
+      "PendingStdCost",
+      "POAccrualAccount",
+      "POAccrualSubaccount",
+      "PostingClass",
+      "PriceClass",
+      "PriceManager",
+      "PriceWorkgroup",
+      "ProductManager",
+      "ProductWorkgroup",
+      "PurchasePriceVarianceAccount",
+      "PurchasePriceVarianceSubaccount",
+      "PurchaseUOM",
+      "ReasonCodeSubaccount",
+      "SalesAccount",
+      "SalesSubaccount",
+      "SalesUOM",
+      "StandardCostRevaluationAccount",
+      "StandardCostRevaluationSubaccount",
+      "StandardCostVarianceAccount",
+      "StandardCostVarianceSubaccount",
+      "SubjectToCommission",
+      "TaxCategory",
+      "TariffCode",
+      "UseOnEntry",
+      "ValuationMethod",
+      "VolumeUOM",
+      "WeightUOM",
+      "CurySpecificMSRP",
+      "CurySpecificPrice",
+      "Availability",
+      "CustomURL",
+      "ExportToExternal",
+      "MetaDescription",
+      "MetaKeywords",
+      "NoteID",
+      "PageTitle",
+      "SearchKeywords",
+      "TemplateItemID",
+      "Visibility",
+      "NotAvailable"
+    ],
+    "key_fields": [
+      "InventoryID"
+    ],
+    "key_format": "Single value: <InventoryID>",
+    "note": "ALWAYS pass select= with specific fields - the full record is enormous and can blow the response limit."
+  },
+  "StorageDetailsByLocationInquiry": {
+    "actions": [],
+    "fields": [
+      "SplitByLocation",
+      "WarehouseID"
+    ],
+    "expand": [
+      "StorageDetailsByLocation"
+    ],
+    "key_fields": [
+      "WarehouseID"
+    ]
+  },
+  "StorageDetailsInquiry": {
+    "actions": [],
+    "fields": [
+      "WarehouseID"
+    ],
+    "expand": [
+      "StorageDetails"
+    ],
+    "key_fields": [
+      "WarehouseID"
+    ]
+  },
+  "Subaccount": {
+    "actions": [],
+    "fields": [
+      "Active",
+      "Description",
+      "Secured",
+      "SubaccountCD",
+      "SubaccountID"
+    ],
+    "key_fields": [
+      "SubaccountCD"
+    ],
+    "key_format": "Single value: <SubaccountCD>"
+  },
+  "Subcontract": {
+    "actions": [
+      "PutOnHold",
+      "ReleaseFromHold"
+    ],
+    "fields": [
+      "SubcontractNbr",
+      "Status",
+      "Date",
+      "StartDate",
+      "Description",
+      "VendorID",
+      "Location",
+      "Owner",
+      "CurrencyID",
+      "BaseCurrencyID",
+      "CurrencyEffectiveDate",
+      "CurrencyRate",
+      "CurrencyRateTypeID",
+      "CurrencyReciprocalRate",
+      "VendorRef",
+      "LineTotal",
+      "DiscountTotal",
+      "RetainageTotal",
+      "SubcontractTotal",
+      "TaxTotal",
+      "ControlTotal",
+      "Branch",
+      "Terms",
+      "VendorTaxZone",
+      "ApplyRetainage",
+      "RetainagePct",
+      "DoNotEmail",
+      "DoNotPrint",
+      "Emailed",
+      "Printed",
+      "LastModifiedDateTime",
+      "VendorAddressInfo",
+      "VendorContactInfo"
+    ],
+    "expand": [
+      "Details",
+      "TaxDetails"
+    ],
+    "key_fields": [
+      "SubcontractNbr",
+      "VendorID"
+    ]
+  },
+  "Task": {
+    "actions": [
+      "CancelActivityTask",
+      "CompleteTask"
+    ],
+    "fields": [
+      "Body",
+      "Category",
+      "CompletedAt",
+      "CompletionPercentage",
+      "DueDate",
+      "Internal",
+      "NoteID",
+      "Owner",
+      "Parent",
+      "ParentSummary",
+      "Priority",
+      "Reminder",
+      "StartDate",
+      "Status",
+      "Summary",
+      "TimeActivity",
+      "WorkgroupID",
+      "CreatedByID",
+      "CreatedDateTime",
+      "LastModifiedDateTime",
+      "RelatedEntityType",
+      "RelatedEntityNoteID",
+      "RelatedEntityDescription"
+    ],
+    "expand": [
+      "RelatedActivities",
+      "RelatedTasks"
+    ],
+    "key_fields": [
+      "NoteID",
+      "WorkgroupID"
+    ]
+  },
+  "Tax": {
+    "actions": [],
+    "fields": [
+      "CalculateOn",
+      "CashDiscount",
+      "CreatedDateTime",
+      "DeductibleVAT",
+      "Description",
+      "EnterFromTaxBill",
+      "ExcludeFromTaxonTaxCalculation",
+      "IncludeInVATExemptTotal",
+      "IncludeInVATTaxableTotal",
+      "LastModifiedDateTime",
+      "NotValidAfter",
+      "PendingVAT",
+      "ReverseVAT",
+      "StatisticalVAT",
+      "TaxAgency",
+      "TaxClaimableAccount",
+      "TaxClaimableSubaccount",
+      "TaxExpenseAccount",
+      "TaxExpenseSubaccount",
+      "TaxID",
+      "TaxPayableAccount",
+      "TaxPayableSubaccount",
+      "TaxType"
+    ],
+    "expand": [
+      "TaxSchedule",
+      "Zones"
+    ],
+    "key_fields": [
+      "TaxID"
+    ],
+    "key_format": "Single value: <TaxID>"
+  },
+  "TaxCategory": {
+    "actions": [],
+    "fields": [
+      "Active",
+      "CreatedDateTime",
+      "Description",
+      "ExcludeListedTaxes",
+      "LastModifiedDateTime",
+      "TaxCategoryID"
+    ],
+    "expand": [
+      "Details"
+    ],
+    "key_fields": [
+      "TaxCategoryID"
+    ],
+    "key_format": "Single value: <TaxCategoryID>"
+  },
+  "TaxReportingSettings": {
+    "actions": [],
+    "fields": [
+      "TaxAgency"
+    ],
+    "expand": [
+      "ReportingGroups"
+    ],
+    "key_fields": []
+  },
+  "TaxZone": {
+    "actions": [],
+    "fields": [
+      "CreatedDateTime",
+      "Description",
+      "LastModifiedDateTime",
+      "TaxZoneID"
+    ],
+    "expand": [
+      "ApplicableTaxes"
+    ],
+    "key_fields": [
+      "TaxZoneID"
+    ]
+  },
+  "TemplateItems": {
+    "actions": [],
+    "fields": [
+      "SalesUOM",
+      "CurySpecificMSRP",
+      "CurySpecificPrice",
+      "ItemClass",
+      "Availability",
+      "BaseUOM",
+      "Content",
+      "CurrentStdCost",
+      "CustomURL",
+      "DefaultIssueLocationID",
+      "DefaultPrice",
+      "Description",
+      "DimensionWeight",
+      "ExportToExternal",
+      "InventoryID",
+      "IsStockItem",
+      "ItemStatus",
+      "LastModified",
+      "LastModifiedDateTime",
+      "MetaDescription",
+      "MSRP",
+      "PageTitle",
+      "SearchKeywords",
+      "TaxCategory",
+      "Visibility",
+      "WeightUOM",
+      "MetaKeywords",
+      "RequireShipment",
+      "NotAvailable"
+    ],
+    "expand": [
+      "Attributes",
+      "Categories",
+      "FileURLs",
+      "Matrix",
+      "VendorDetails"
+    ],
+    "key_fields": [
+      "DefaultIssueLocationID",
+      "InventoryID"
+    ]
+  },
+  "TimeEntry": {
+    "actions": [
+      "CompleteTimeEntry",
+      "OpenTimeEntry"
+    ],
+    "expand": [],
+    "fields": [
+      "ApprovalStatus",
+      "Approver",
+      "Billable",
+      "BillableOvertime",
+      "BillableTime",
+      "CertifiedJob",
+      "CostCode",
+      "CostRate",
+      "Date",
+      "EarningType",
+      "Employee",
+      "ExternalRefNbr",
+      "LaborItem",
+      "LastModifiedDateTime",
+      "Overtime",
+      "ProjectID",
+      "ProjectTaskID",
+      "Summary",
+      "Time",
+      "TimeEntryID",
+      "TimeSpent",
+      "UnionLocal",
+      "WCCCode"
+    ],
+    "key_fields": [
+      "EarningType",
+      "ExternalRefNbr"
+    ]
+  },
+  "TransferOrder": {
+    "actions": [
+      "ReleaseTransferOrder"
+    ],
+    "fields": [
+      "Date",
+      "Description",
+      "ExternalRef",
+      "FromWarehouseID",
+      "Hold",
+      "LastModifiedDateTime",
+      "PostPeriod",
+      "ReferenceNbr",
+      "Status",
+      "TotalQty",
+      "ToWarehouseID",
+      "TransferType"
+    ],
+    "expand": [
+      "Details"
+    ],
+    "key_fields": [
+      "ReferenceNbr"
+    ],
+    "key_format": "Single value: <ReferenceNbr>"
+  },
+  "UnionLocal": {
+    "actions": [],
+    "fields": [
+      "Active",
+      "Description",
+      "UnionLocalID"
+    ],
+    "key_fields": [
+      "UnionLocalID"
+    ]
+  },
+  "UnitsOfMeasure": {
+    "actions": [],
+    "fields": [
+      "UnitID",
+      "Description",
+      "L3Code"
+    ],
+    "expand": [
+      "Conversion"
+    ],
+    "key_fields": [
+      "UnitID"
+    ]
+  },
+  "Vendor": {
+    "actions": [
+      "CreateContactFromVendor"
+    ],
+    "expand": [
+      "Contacts",
+      "RemittanceContact",
+      "RemittanceAddress"
+    ],
+    "fields": [
+      "AccountRef",
+      "APAccount",
+      "APSubaccount",
+      "CashAccount",
+      "CreatedDateTime",
+      "CurrencyID",
+      "CurrencyRateType",
+      "EnableCurrencyOverride",
+      "EnableRateOverride",
+      "F1099Box",
+      "F1099Vendor",
+      "FATCA",
+      "FOBPoint",
+      "ForeignEntity",
+      "LandedCostVendor",
+      "LastModifiedDateTime",
+      "LeadTimedays",
+      "LegalName",
+      "LocationName",
+      "MainContact",
+      "MaxReceipt",
+      "MinReceipt",
+      "ParentAccount",
+      "PaymentBy",
+      "PaymentLeadTimedays",
+      "PaymentMethod",
+      "PaySeparately",
+      "PrimaryContact",
+      "PrintOrders",
+      "ReceiptAction",
+      "ReceivingBranch",
+      "RemittanceAddressOverride",
+      "RemittanceContact",
+      "RemittanceContactOverride",
+      "SendOrdersbyEmail",
+      "ShippingContactOverride",
+      "ShippingAddressOverride",
+      "ShippingContact",
+      "ShippingTerms",
+      "ShipVia",
+      "Status",
+      "TaxCalculationMode",
+      "TaxRegistrationID",
+      "TaxZone",
+      "Terms",
+      "ThresholdReceipt",
+      "VendorClass",
+      "VendorID",
+      "VendorIsLaborUnion",
+      "VendorIsTaxAgency",
+      "VendorName",
+      "Warehouse"
+    ],
+    "key_fields": [
+      "VendorID"
+    ],
+    "key_format": "Single value: <VendorID>"
+  },
+  "VendorClass": {
+    "actions": [],
+    "fields": [
+      "ClassID",
+      "CreatedDateTime",
+      "Description",
+      "LastModifiedDateTime"
+    ],
+    "expand": [
+      "Attributes"
+    ],
+    "key_fields": [
+      "ClassID"
+    ],
+    "key_format": "Single value: <ClassID>"
+  },
+  "VendorPriceWorksheet": {
+    "actions": [
+      "ReleaseVendorPriceWorksheet"
+    ],
+    "fields": [
+      "CreatedDateTime",
+      "Description",
+      "EffectiveDate",
+      "ExpirationDate",
+      "Hold",
+      "LastModifiedDateTime",
+      "OverwriteOverlappingPrices",
+      "Promotional",
+      "ReferenceNbr",
+      "Status"
+    ],
+    "expand": [
+      "VendorSalesPrices"
+    ],
+    "key_fields": [
+      "ReferenceNbr"
+    ]
+  },
+  "VendorPricesInquiry": {
+    "actions": [],
+    "fields": [
+      "InventoryID",
+      "ItemClass",
+      "ProductManager",
+      "ProductWorkgroup",
+      "Vendor"
+    ],
+    "expand": [
+      "VendorPriceDetails"
+    ],
+    "query_only": true,
+    "note": "Often NON-FUNCTIONAL via REST - queries (even filtered) tend to return 500 CannotOptimizeException. For pricing read StockItem/NonStockItem fields (DefaultPrice, MSRP, LastCost, AverageCost) instead."
+  },
+  "Warehouse": {
+    "actions": [],
+    "fields": [
+      "Active",
+      "COGSExpenseAccount",
+      "COGSExpenseSubaccount",
+      "Description",
+      "DiscountAccount",
+      "DiscountSubaccount",
+      "DropShipLocationID",
+      "FreightChargeAccount",
+      "FreightChargeSubaccount",
+      "InventoryAccount",
+      "InventorySubaccount",
+      "LandedCostVarianceAccount",
+      "LandedCostVarianceSubaccount",
+      "LastModifiedDateTime",
+      "MiscChargeAccount",
+      "MiscChargeSubaccount",
+      "NonStockPickingLocationID",
+      "OverrideInventoryAccountSubaccount",
+      "POAccrualAccount",
+      "POAccrualSubaccount",
+      "PurchasePriceVarianceAccount",
+      "PurchasePriceVarianceSubaccount",
+      "ReasonCodeSubaccount",
+      "ReceivingLocationID",
+      "RMALocationID",
+      "SalesAccount",
+      "SalesSubaccount",
+      "ShippingLocationID",
+      "StandardCostRevaluationAccount",
+      "StandardCostRevaluationSubaccount",
+      "StandardCostVarianceAccount",
+      "StandardCostVarianceSubaccount",
+      "UseItemDefaultLocationForPicking",
+      "WarehouseID"
+    ],
+    "expand": [
+      "Locations"
+    ],
+    "key_fields": [
+      "WarehouseID"
+    ],
+    "key_format": "Single value: <WarehouseID>"
+  },
+  "WorkCalendar": {
+    "actions": [],
+    "fields": [
+      "CalendarSettings",
+      "Description",
+      "TimeZone",
+      "WorkCalendarID"
+    ],
+    "expand": [
+      "CalendarExceptions"
+    ],
+    "key_fields": [
+      "WorkCalendarID"
+    ]
+  },
+  "WorkClassCompensationCode": {
+    "actions": [],
+    "fields": [
+      "Active",
+      "CostCodeFrom",
+      "CostCodeTo",
+      "Description",
+      "WCCCode"
+    ],
+    "key_fields": []
+  },
+  "WorkLocation": {
+    "actions": [],
+    "fields": [
+      "Active",
+      "AddressInfo",
+      "LastModifiedDateTime",
+      "UseAddressfromBranchID",
+      "WorkLocationID",
+      "WorkLocationName"
+    ],
+    "key_fields": [
+      "UseAddressfromBranchID",
+      "WorkLocationID"
+    ]
+  }
+}
