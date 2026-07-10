@@ -32,12 +32,16 @@ from mcp.server.fastmcp import FastMCP
 # Which .env file to load is selectable via ACUMATICA_ENV_FILE so a single server.py
 # can serve multiple Acumatica instances (e.g. production vs. a test/sandbox tenant).
 # The value may be an absolute path or a name relative to this directory. Defaults to ".env".
-# override=True means the chosen file is authoritative over any inherited process env.
+#
+# Provide credentials via EITHER your MCP client's env block (the process environment)
+# OR this .env file - pick one, you do not need both. override=False means the process
+# environment wins; the .env file only fills in variables that are not already set, so a
+# stale .env cannot silently override the config passed from your MCP client.
 _env_file = os.environ.get("ACUMATICA_ENV_FILE", ".env")
 _env_path = Path(_env_file)
 if not _env_path.is_absolute():
     _env_path = Path(__file__).parent / _env_path
-load_dotenv(_env_path, override=True)
+load_dotenv(_env_path, override=False)
 logging.basicConfig(level=os.environ.get("ACUMATICA_LOG_LEVEL", "INFO"))
 log = logging.getLogger("acumatica-mcp")
 

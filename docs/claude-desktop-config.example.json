@@ -1,5 +1,5 @@
 {
-  "_comment": "Example Claude Desktop MCP registration. Add the 'acumatica' block below to the 'mcpServers' object in your claude_desktop_config.json. Credentials are passed via the 'env' block, so no .env file is required. Replace the 'command' path and all credential values. The server is READ-ONLY by default: set ACUMATICA_ALLOW_WRITES to '1' to enable upsert/actions, and ACUMATICA_ALLOW_DELETES to '1' to enable deletes.",
+  "_comment": "Example Claude Desktop MCP registration. Add the 'acumatica' block below to the 'mcpServers' object in your claude_desktop_config.json. Credentials are passed via the 'env' block, so no .env file is required (use this OR a .env file, not both). Replace the 'command' path and all credential values. The server is READ-ONLY by default: set ACUMATICA_ALLOW_WRITES to '1' to enable upsert/actions, and ACUMATICA_ALLOW_DELETES to '1' to enable deletes.",
 
   "mcpServers": {
     "acumatica": {

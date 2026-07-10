@@ -145,9 +145,15 @@ This installs an `acumatica-mcp-server` console entry point and
 
 ## Configuration
 
-Provide your tenant's connection details **either** via environment variables in
-your MCP client config (recommended, nothing on disk) **or** via a `.env` file.
-Copy [`.env.example`](.env.example) to `.env` and fill it in:
+The server reads its connection settings from environment variables. There are two
+ways to supply them, and you only need **one** (you never enter credentials twice):
+
+- **Option A: the MCP client `env` block (recommended).** Put the values in your MCP
+  client config (see [Register with Claude Desktop](#register-with-claude-desktop)).
+  Nothing is written to disk and no `.env` file is needed.
+- **Option B: a `.env` file.** Copy [`.env.example`](.env.example) to `.env` next to
+  `server.py` and fill it in. Your MCP client config then only needs the
+  `command`/`args`, not the credentials.
 
 ```ini
 ACUMATICA_BASE_URL=https://your-instance.acumatica.com
@@ -157,10 +163,15 @@ ACUMATICA_PASSWORD=your-password
 ACUMATICA_COMPANY=YourCompany
 ```
 
+If you set both, the `env` block (process environment) wins and the `.env` file only
+fills in anything it did not set.
+
 ## Register with Claude Desktop
 
 Add this to your `claude_desktop_config.json` (full example in
-[`docs/claude-desktop-config.example.json`](docs/claude-desktop-config.example.json)):
+[`docs/claude-desktop-config.example.json`](docs/claude-desktop-config.example.json)).
+This is **Option A**: credentials live in the `env` block. If you use a `.env` file
+instead (Option B), drop the `ACUMATICA_*` credential keys from `env`:
 
 ```json
 {
