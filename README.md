@@ -41,9 +41,7 @@ Instead of hand-coding hundreds of endpoints, this server exposes 8 tools that
 cover the entire surface (all ~119 entities in a standard tenant), plus a small
 catalog that teaches the model each entity's fields, key format, and actions.
 
-> **Status:** Beta. Battle-tested in day-to-day operations against a live
-> production Acumatica ERP before being generalized and open-sourced here.
-
+> **Status:** Beta. Battle-tested.
 ## Table of Contents
 
 - [Features](#features)
