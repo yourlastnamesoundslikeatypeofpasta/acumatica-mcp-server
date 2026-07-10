@@ -147,17 +147,27 @@ def resolve_ref(ref: str, schemas: dict) -> dict:
 
 
 def extract_fields_and_expand(
-    schema: dict, schemas: dict
+    schema: dict, schemas: dict, _seen: set[str] | None = None
 ) -> tuple[list[str], list[str]]:
-    """Return (scalar_fields, array_fields) from a schema, resolving allOf."""
+    """Return (scalar_fields, array_fields) from a schema, resolving allOf.
+
+    _seen tracks already-followed $ref names so a schema with circular references
+    cannot recurse forever.
+    """
     scalars: list[str] = []
     arrays: list[str] = []
+    if _seen is None:
+        _seen = set()
 
     if "$ref" in schema:
-        return extract_fields_and_expand(resolve_ref(schema["$ref"], schemas), schemas)
+        ref_name = schema["$ref"].split("/")[-1]
+        if ref_name in _seen:
+            return scalars, arrays
+        _seen.add(ref_name)
+        return extract_fields_and_expand(resolve_ref(schema["$ref"], schemas), schemas, _seen)
 
     for sub in schema.get("allOf", []):
-        s, a = extract_fields_and_expand(sub, schemas)
+        s, a = extract_fields_and_expand(sub, schemas, _seen)
         scalars.extend(s)
         arrays.extend(a)
 
@@ -218,11 +228,6 @@ def main() -> None:
 
         # Only set expand if not already explicitly set
         if "expand" not in entity_data and expand_cols:
-            seen_e: set[str] = set()
-            entity_data["expand"] = [
-                e for e in expand_cols if not (seen_e.add(e) or e in seen_e)  # type: ignore[func-returns-value]
-            ]
-            # Simpler dedup
             entity_data["expand"] = list(dict.fromkeys(expand_cols))
 
         if entity_name in QUERY_ONLY_ENTITIES:

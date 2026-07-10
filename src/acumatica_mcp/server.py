@@ -20,6 +20,7 @@ import json
 import logging
 import os
 import sys
+import threading
 from pathlib import Path
 from typing import Any
 from urllib.parse import quote, urlencode
@@ -79,7 +80,7 @@ except FileNotFoundError:
 # ---------- browser deep-link map ----------
 # Acumatica URL format: {BASE_URL}/Main?CompanyID={co}&ScreenId={sid}&{key_params}
 # params entries: (api_field_name, url_param_name, optional_value_map)
-# value_map converts API display values → URL internal codes (falls back to raw value).
+# value_map converts API display values -> URL internal codes (falls back to raw value).
 
 _AP_DOCTYPE: dict[str, str] = {
     "Bill": "INV", "Credit Adj.": "APC", "Debit Adj.": "ADR",
@@ -150,51 +151,60 @@ mcp = FastMCP("acumatica")
 
 
 # ---------- HTTP session (cookie-based) ----------
+class AcumaticaAuthError(RuntimeError):
+    """Raised when logging in to Acumatica fails (bad credentials, locked account)."""
+
+
 class AcumaticaSession:
-    """Thin wrapper that lazily logs in and keeps the session cookie alive."""
+    """Thin wrapper that lazily logs in and keeps the session cookie alive.
+
+    A lock guards login and lazy client creation so concurrent tool dispatch
+    cannot double-login or race on the shared httpx client.
+    """
 
     def __init__(self) -> None:
         self._client: httpx.Client | None = None
         self._logged_in: bool = False
-
-    def _client_or_open(self) -> httpx.Client:
-        if self._client is None:
-            self._client = httpx.Client(
-                base_url=BASE_URL,
-                timeout=httpx.Timeout(60.0, connect=10.0),
-                follow_redirects=False,
-            )
-        return self._client
+        self._lock = threading.Lock()
 
     def login(self) -> None:
         if self._logged_in:
             return
-        c = self._client_or_open()
-        body: dict[str, Any] = {
-            "name": USERNAME,
-            "password": PASSWORD,
-            "locale": LOCALE,
-        }
-        if COMPANY:
-            body["company"] = COMPANY
-        if BRANCH:
-            body["branch"] = BRANCH
-        log.info("Logging in to Acumatica as %s", USERNAME)
-        r = c.post("/entity/auth/login", json=body)
-        if r.status_code >= 400:
-            raise RuntimeError(
-                f"Acumatica login failed ({r.status_code}): {r.text[:300]}"
-            )
-        self._logged_in = True
+        with self._lock:
+            if self._logged_in:  # re-check under the lock
+                return
+            if self._client is None:
+                self._client = httpx.Client(
+                    base_url=BASE_URL,
+                    timeout=httpx.Timeout(60.0, connect=10.0),
+                    follow_redirects=False,
+                )
+            body: dict[str, Any] = {
+                "name": USERNAME,
+                "password": PASSWORD,
+                "locale": LOCALE,
+            }
+            if COMPANY:
+                body["company"] = COMPANY
+            if BRANCH:
+                body["branch"] = BRANCH
+            log.info("Logging in to Acumatica as %s", USERNAME)
+            r = self._client.post("/entity/auth/login", json=body)
+            if r.status_code >= 400:
+                raise AcumaticaAuthError(
+                    f"Acumatica login failed ({r.status_code}): {r.text[:300]}"
+                )
+            self._logged_in = True
 
     def logout(self) -> None:
-        if not self._logged_in or self._client is None:
-            return
-        try:
-            self._client.post("/entity/auth/logout")
-        except Exception:
-            pass
-        self._logged_in = False
+        with self._lock:
+            if not self._logged_in or self._client is None:
+                return
+            try:
+                self._client.post("/entity/auth/logout")
+            except Exception:
+                pass
+            self._logged_in = False
 
     def request(
         self,
@@ -204,14 +214,16 @@ class AcumaticaSession:
         json_body: Any | None = None,
     ) -> httpx.Response:
         self.login()
-        c = self._client_or_open()
+        c = self._client
+        assert c is not None  # login() guarantees the client exists
         full_path = f"{ENDPOINT_PATH}{path}"
         log.debug("%s %s params=%s", method, full_path, params)
         r = c.request(method, full_path, params=params, json=json_body)
         # Re-auth on 401, retry once
         if r.status_code == 401:
             log.info("Session expired, re-logging in")
-            self._logged_in = False
+            with self._lock:
+                self._logged_in = False
             self.login()
             r = c.request(method, full_path, params=params, json=json_body)
         return r
@@ -226,7 +238,7 @@ def _build_browser_url(entity: str, record: dict) -> str | None:
     Format: {BASE_URL}/Main?CompanyID={co}&ScreenId={sid}&{key_params}
     Returns None if the entity has no SCREEN_MAP entry or a key field is missing.
     Value maps translate API display values to Acumatica URL internal codes
-    (e.g. Type="Bill" → DocType=INV). Falls back to raw value when not in map.
+    (e.g. Type="Bill" -> DocType=INV). Falls back to raw value when not in map.
     """
     entry = SCREEN_MAP.get(entity)
     if not entry:
@@ -292,6 +304,7 @@ def _format_response(r: httpx.Response, entity: str | None = None) -> dict[str, 
         "ok": r.is_success,
     }
     if not r.is_success:
+        # raw upstream error text (truncated); handy for debugging your own tenant
         out["error"] = r.text[:1000]
         hint = _error_hint(r.status_code, r.text, entity)
         if hint:
@@ -366,6 +379,39 @@ def _write_blocked(kind: str, env_var: str) -> dict[str, Any]:
     }
 
 
+def _request(
+    method: str,
+    path: str,
+    *,
+    entity: str | None = None,
+    params: dict | None = None,
+    json_body: Any | None = None,
+) -> dict[str, Any]:
+    """Run a request through the session and format it, turning connection and
+    auth failures into the uniform error envelope instead of raising out of a tool.
+    """
+    try:
+        r = session.request(method, path, params=params, json_body=json_body)
+    except AcumaticaAuthError as e:
+        return {"status": 401, "ok": False, "error": str(e)}
+    except httpx.HTTPError as e:
+        return {"status": 0, "ok": False, "error": f"Could not reach Acumatica: {e}"}
+    return _format_response(r, entity=entity)
+
+
+def _maybe_key_hint(out: dict[str, Any], entity: str) -> dict[str, Any]:
+    """Add a key-format hint to a failed single-record request (likely a bad key)."""
+    if not out.get("ok") and out.get("status") in (400, 404, 500):
+        meta = ENTITY_CATALOG.get(entity, {})
+        kf = meta.get("key_format")
+        if kf and "hint" not in out:
+            out["hint"] = (
+                f"Check the key: {entity} key_format is \"{kf}\" "
+                f"(key field values joined with '/'). A record GUID also works."
+            )
+    return out
+
+
 # ---------- tools ----------
 @mcp.tool()
 def list_entities(filter: str | None = None) -> dict[str, Any]:
@@ -429,16 +475,16 @@ def describe_entity(entity: str) -> dict[str, Any]:
 
     Examples:
         describe_entity("SalesOrder")
-        # → key_format: "Slash-separated: <OrderType>/<OrderNbr>"
-        # → use get_record("SalesOrder", "QT/I004264")
+        # -> key_format: "Slash-separated: <OrderType>/<OrderNbr>"
+        # -> use get_record("SalesOrder", "QT/I004264")
 
         describe_entity("Bill")
-        # → key_format: "Slash-separated: <Type>/<ReferenceNbr>"
-        # → use get_record("Bill", "Bill/012979")
+        # -> key_format: "Slash-separated: <Type>/<ReferenceNbr>"
+        # -> use get_record("Bill", "Bill/012979")
 
         describe_entity("AccountSummaryInquiry")
-        # → query_only: true
-        # → use list_records("AccountSummaryInquiry", filter="Period eq '202506'")
+        # -> query_only: true
+        # -> use list_records("AccountSummaryInquiry", filter="Period eq '202506'")
     """
     meta = ENTITY_CATALOG.get(entity)
     if meta is None:
@@ -506,7 +552,7 @@ def list_records(
         top:    Max rows to return. Defaults to 50; use a smaller number when exploring.
         skip:   Rows to skip (pagination).
         select: Comma-separated fields, e.g. "OrderNbr,CustomerID,OrderTotal".
-                Only use field names returned by describe_entity() - invalid names → 500.
+                Only use field names returned by describe_entity() - invalid names -> 500.
         expand: Comma-separated sub-collections to inline, e.g. "Details,Shipments".
                 Valid values are listed in describe_entity() under 'expand'.
         orderby: e.g. "Date desc".
@@ -533,8 +579,7 @@ def list_records(
             [050297](https://example.acumatica.com/Main?ScreenId=AP301000&ID=...)
     """
     params = _build_odata_params(filter, top, skip, select, expand, orderby, custom)
-    r = session.request("GET", f"/{entity}", params=params)
-    return _format_response(r, entity=entity)
+    return _request("GET", f"/{entity}", entity=entity, params=params)
 
 
 @mcp.tool()
@@ -555,10 +600,10 @@ def get_record(
         entity: Entity name.
         id:     The record key - key field values joined with '/' in key order.
                 Examples:
-                  SalesOrder  → "QT/I004264"    (OrderType/OrderNbr)
-                  Bill        → "Bill/001234"   (Type/ReferenceNbr)
-                  Customer    → "C000001"       (CustomerID only)
-                  Invoice     → "INV/001234"    (Type/ReferenceNbr)
+                  SalesOrder  -> "QT/I004264"    (OrderType/OrderNbr)
+                  Bill        -> "Bill/001234"   (Type/ReferenceNbr)
+                  Customer    -> "C000001"       (CustomerID only)
+                  Invoice     -> "INV/001234"    (Type/ReferenceNbr)
                 Use describe_entity() to find the exact key_fields for any entity.
                 A GUID (the session 'id' field) also works if you have it.
         select / expand / custom: same as list_records.
@@ -570,17 +615,8 @@ def get_record(
             [050297](https://example.acumatica.com/Main?ScreenId=AP301000&ID=...)
     """
     params = _build_odata_params(None, None, None, select, expand, None, custom)
-    r = session.request("GET", f"/{entity}/{_enc_key(id)}", params=params)
-    out = _format_response(r, entity=entity)
-    if not out.get("ok") and out.get("status") in (400, 404, 500):
-        meta = ENTITY_CATALOG.get(entity, {})
-        kf = meta.get("key_format")
-        if kf and "hint" not in out:
-            out["hint"] = (
-                f"Check the key: {entity} key_format is \"{kf}\" "
-                f"(key field values joined with '/'). A record GUID also works."
-            )
-    return out
+    out = _request("GET", f"/{entity}/{_enc_key(id)}", entity=entity, params=params)
+    return _maybe_key_hint(out, entity)
 
 
 @mcp.tool()
@@ -600,8 +636,7 @@ def upsert_record(entity: str, data: dict[str, Any]) -> dict[str, Any]:
     """
     if not ALLOW_WRITES:
         return _write_blocked("Writes", "ACUMATICA_ALLOW_WRITES")
-    r = session.request("PUT", f"/{entity}", json_body=data)
-    return _format_response(r, entity=entity)
+    return _request("PUT", f"/{entity}", entity=entity, json_body=data)
 
 
 @mcp.tool()
@@ -609,8 +644,8 @@ def delete_record(entity: str, id: str) -> dict[str, Any]:
     """Delete a record by ID or key fields. Requires ACUMATICA_ALLOW_DELETES=1."""
     if not ALLOW_DELETES:
         return _write_blocked("Deletes", "ACUMATICA_ALLOW_DELETES")
-    r = session.request("DELETE", f"/{entity}/{_enc_key(id)}")
-    return _format_response(r)
+    out = _request("DELETE", f"/{entity}/{_enc_key(id)}", entity=entity)
+    return _maybe_key_hint(out, entity)
 
 
 @mcp.tool()
@@ -644,8 +679,7 @@ def invoke_action(
         body["entity"] = entity_record
     if parameters is not None:
         body["parameters"] = parameters
-    r = session.request("POST", f"/{entity}/{action}", json_body=body or None)
-    return _format_response(r)
+    return _request("POST", f"/{entity}/{action}", json_body=body or None)
 
 
 @mcp.tool()
@@ -675,8 +709,7 @@ def get_schema(entity: str) -> dict[str, Any]:
         2. list_records("SalesOrder",             # pull extension + standard DAC fields
                custom="Document.CreatedByID,Document.UsrYourCustomField")
     """
-    r = session.request("GET", f"/{entity}/$adHocSchema")
-    return _format_response(r)
+    return _request("GET", f"/{entity}/$adHocSchema")
 
 
 # ---------- entrypoint ----------

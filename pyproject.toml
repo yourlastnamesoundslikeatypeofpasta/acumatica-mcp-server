@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "acumatica-mcp-server"
-version = "0.2.0"
+version = "0.2.1"
 description = "A Model Context Protocol (MCP) server for Acumatica ERP - query and act on any tenant's contract-based REST API through 8 generic tools."
 readme = "README.md"
 requires-python = ">=3.10"

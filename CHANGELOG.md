@@ -3,6 +3,21 @@
 All notable changes to this project are documented here. This project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [0.2.1] - 2026-07-10
+
+Robustness and correctness fixes.
+
+- Record keys are now URL-encoded per segment, so a key containing `#`, `?`, `%`, or
+  spaces (e.g. a StockItem `#05773`) resolves correctly instead of being truncated by
+  the URL parser.
+- Connection and authentication failures now return the uniform `{ok: false}` error
+  envelope instead of raising out of a tool call.
+- The HTTP session is now thread-safe: login and lazy client creation are lock-guarded.
+- `delete_record` returns the same key-format hint as `get_record` on a bad key.
+- `rebuild_catalog.py` guards against infinite recursion on circular `$ref` schemas
+  and drops a dead dedup branch.
+- Removed a residual domain-specific docstring token and normalized remaining non-ASCII.
+
 ## [0.2.0] - 2026-07-10
 
 Added a starter set of **skills**: repeatable, tested workflows layered on top of
