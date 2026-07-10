@@ -42,6 +42,9 @@ cover the entire surface (all ~119 entities in a standard tenant), plus a small
 catalog that teaches the model each entity's fields, key format, and actions.
 
 > **Status:** Beta. Battle-tested.
+
+
+
 ## Table of Contents
 
 - [Features](#features)
@@ -60,6 +63,8 @@ catalog that teaches the model each entity's fields, key format, and actions.
 - [License](#license)
 - [Disclaimer](#disclaimer)
 
+
+
 ## Features
 
 - **Small and legible.** One server file, ~700 lines, three dependencies. You can
@@ -73,6 +78,8 @@ catalog that teaches the model each entity's fields, key format, and actions.
   straight to the record in the Acumatica web UI.
 - **Self-correcting queries.** Errors return actionable hints (wrong field name,
   missing mandatory filter, permission gap) instead of raw HTTP 500s.
+
+
 
 ## Architecture
 
@@ -90,6 +97,8 @@ The server is a thin, stateless translator: MCP tool calls in, Acumatica REST
 calls out. All entity knowledge (fields, keys, actions) lives in a data catalog
 (`entity_catalog.json`), so the tools stay generic.
 
+
+
 ## The 8 tools
 
 | Tool | HTTP | What it does |
@@ -105,6 +114,8 @@ calls out. All entity knowledge (fields, keys, actions) lives in a data catalog
 
 See **[docs/USAGE.md](docs/USAGE.md)** for the field-name, key-format, `$filter`,
 and `$custom` rules that make queries reliable.
+
+
 
 ## How a query flows
 
@@ -122,12 +133,16 @@ flowchart TD
     G -->|not set| BL[403 blocked: read-only by default]
 ```
 
+
+
 ## Requirements
 
 - An Acumatica instance with the **contract-based REST API** enabled (the default
   `Default` endpoint, for example version `24.200.001`).
 - A **dedicated service / integration account** with the appropriate role(s).
 - Python **3.10+**.
+
+
 
 ## Installation
 
@@ -142,6 +157,8 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
+
+
 ### Option B: pip install
 
 ```bash
@@ -150,6 +167,8 @@ pip install acumatica-mcp-server
 
 This installs an `acumatica-mcp-server` console entry point and
 `python -m acumatica_mcp.server`.
+
+
 
 ## Configuration
 
@@ -173,6 +192,8 @@ ACUMATICA_COMPANY=YourCompany
 
 If you set both, the `env` block (process environment) wins and the `.env` file only
 fills in anything it did not set.
+
+
 
 ## Register with Claude Desktop
 
@@ -202,6 +223,8 @@ instead (Option B), drop the `ACUMATICA_*` credential keys from `env`:
 Restart Claude Desktop, then try: *"List the open sales orders modified in the
 last 14 days"* or *"Describe the Bill entity."*
 
+
+
 ## Authentication
 
 Cookie-based. The server logs in on the first request, holds the session cookie,
@@ -219,6 +242,8 @@ sequenceDiagram
     S->>A: POST /entity/auth/logout (on exit)
 ```
 
+
+
 ## Write safety (read-only by default)
 
 The three mutating tools are **disabled by default**. Enable them deliberately
@@ -231,6 +256,8 @@ via environment variables:
 
 When a mutating tool is called while disabled, it returns a `403`-style envelope
 with a hint telling you which variable to set. No request is sent to Acumatica.
+
+
 
 ## Regenerating the entity catalog
 
@@ -246,6 +273,8 @@ your tenant's OpenAPI spec:
    ```
 3. Restart the server (the catalog is loaded once at startup).
 
+
+
 ## Security notes
 
 - **Read-only by default.** `upsert_record` and `invoke_action` require
@@ -256,6 +285,8 @@ your tenant's OpenAPI spec:
   layer of defense.
 - `.env` is git-ignored. Keep credentials out of version control; prefer passing
   them through your MCP client's `env` block.
+
+
 
 ## Prior art and related projects
 
@@ -275,9 +306,13 @@ This server's angle is deliberate minimalism: a small, dependency-light,
 self-hostable stdio server you can read top to bottom in one sitting, that works
 against any tenant with nothing but a service account.
 
+
+
 ## License
 
 [MIT](LICENSE) (c) Christian Zagazeta
+
+
 
 ## Disclaimer
 
