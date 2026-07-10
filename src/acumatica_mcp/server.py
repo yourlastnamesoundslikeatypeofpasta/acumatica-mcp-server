@@ -4,8 +4,8 @@ Exposes a small set of generic tools that cover the full Acumatica contract-base
 REST surface (any of the ~119 entities defined in the tenant's OpenAPI spec).
 
 Tools:
-    describe_entity   local  — fields, key format, actions, expand for any entity
-    list_entities     local  — lists known entities from entity_catalog.json
+    describe_entity   local  - fields, key format, actions, expand for any entity
+    list_entities     local  - lists known entities from entity_catalog.json
     list_records      GET    /{Entity}                  with OData params
     get_record        GET    /{Entity}/{ids|id}         single record
     upsert_record     PUT    /{Entity}                  create or update
@@ -237,7 +237,7 @@ def _build_browser_url(entity: str, record: dict) -> str | None:
         raw = record.get(api_field, {})
         val = raw.get("value") if isinstance(raw, dict) else raw
         if val is None:
-            return None  # key field absent — cannot build URL
+            return None  # key field absent - cannot build URL
         val = str(val)
         if value_map:
             val = value_map.get(val, val)  # prefer internal code; fall back to display value
@@ -263,7 +263,7 @@ def _error_hint(status: int, text: str, entity: str | None) -> str | None:
                 f"{', '.join(mf)}. Add them to filter= and retry."
             )
         return (
-            f"{ename} could not run this query — inquiry views need at least one "
+            f"{ename} could not run this query - inquiry views need at least one "
             f"mandatory filter field. Call describe_entity('{ename}') for details; "
             f"some inquiries (SalesPricesInquiry, VendorPricesInquiry) are non-functional via REST."
         )
@@ -348,7 +348,7 @@ def _write_blocked(kind: str, env_var: str) -> dict[str, Any]:
     return {
         "status": 403,
         "ok": False,
-        "error": f"{kind} are disabled — this Acumatica MCP server is read-only by default.",
+        "error": f"{kind} are disabled - this Acumatica MCP server is read-only by default.",
         "hint": f"Set {env_var}=1 in the server's environment and restart to enable {kind.lower()}.",
     }
 
@@ -400,16 +400,16 @@ def describe_entity(entity: str) -> dict[str, Any]:
           "expand": ["Details", "Shipments", ...]
         }
 
-    Query-only entity (inquiry/summary view — no addressable key):
+    Query-only entity (inquiry/summary view - no addressable key):
         {
           "entity": "AccountSummaryInquiry",
           "query_only": true,
-          "note": "This entity has no addressable key — use list_records with filter= only. ...",
+          "note": "This entity has no addressable key - use list_records with filter= only. ...",
           "fields": [...],
           "actions": [],
           "expand": []
         }
-        For query-only entities: do NOT call get_record — pass at least one filter= to list_records.
+        For query-only entities: do NOT call get_record - pass at least one filter= to list_records.
         Calling list_records with no filter on these entities returns HTTP 500 on this tenant.
 
     Returns {error: "Unknown entity"} if the entity is not in the catalog.
@@ -444,20 +444,20 @@ def describe_entity(entity: str) -> dict[str, Any]:
         if mf:
             result["mandatory_filters"] = mf
             result["note"] = (
-                "This entity has no addressable key — use list_records with filter= only "
-                f"(get_record will fail). Mandatory filter fields: {', '.join(mf)} — "
+                "This entity has no addressable key - use list_records with filter= only "
+                f"(get_record will fail). Mandatory filter fields: {', '.join(mf)} - "
                 "omitting them returns HTTP 500 on this tenant."
             )
         else:
             result["note"] = (
-                "This entity has no addressable key — use list_records with filter= only. "
+                "This entity has no addressable key - use list_records with filter= only. "
                 "Calling get_record on it will fail. "
                 "Calling list_records with no filter may return a 500 error on this tenant "
                 "(inquiry views require at least one mandatory filter field)."
             )
     else:
         result["key_fields"] = meta.get("key_fields", [])
-        result["key_format"] = meta.get("key_format", "Unknown — check get_schema() or Acumatica docs")
+        result["key_format"] = meta.get("key_format", "Unknown - check get_schema() or Acumatica docs")
 
     # Live-validated usage note (performance, permissions, known breakage), if any
     if meta.get("note"):
@@ -485,7 +485,7 @@ def list_records(
     Args:
         entity: Entity name, e.g. "SalesOrder", "Bill", "Customer".
         filter: OData $filter expression, e.g. "Status eq 'Open'".
-                Only use field names returned by describe_entity() — guessed names
+                Only use field names returned by describe_entity() - guessed names
                 cause KeyNotFoundException (500).
                 Date/time fields require datetimeoffset literal format:
                     Date gt datetimeoffset'2026-05-01T00:00:00-04:00'
@@ -493,20 +493,20 @@ def list_records(
         top:    Max rows to return. Defaults to 50; use a smaller number when exploring.
         skip:   Rows to skip (pagination).
         select: Comma-separated fields, e.g. "OrderNbr,CustomerID,OrderTotal".
-                Only use field names returned by describe_entity() — invalid names → 500.
+                Only use field names returned by describe_entity() - invalid names → 500.
         expand: Comma-separated sub-collections to inline, e.g. "Details,Shipments".
                 Valid values are listed in describe_entity() under 'expand'.
         orderby: e.g. "Date desc".
                  NOTE: $orderby is silently ignored by this tenant.
                  To get the most recent records, use a date filter instead and sort
-                 client-side. Use a narrow window first — expand only if empty:
+                 client-side. Use a narrow window first - expand only if empty:
                    Step 1: filter="Date gt datetimeoffset'<today-14d>T00:00:00-04:00'"
                    Step 2: if empty, retry with today-30d, then today-90d
                  Client-side: sort results by Date desc, then LastModifiedDateTime desc
                  to find the single most-recent record.
                  This resolves "last created" queries in 1-2 API calls instead of 5+.
         custom: Pull user-defined (DAC extension) fields not in the standard contract.
-                Format: "ViewName.FieldName" — multiple fields comma-separated.
+                Format: "ViewName.FieldName" - multiple fields comma-separated.
                 Example: "Document.LastModifiedByID,Document.CreatedByID"
                 To discover available view names and fields, call get_schema(entity).
                 Common view name for header-level fields: "Document".
@@ -535,12 +535,12 @@ def get_record(
     """Get a single record by its key.
 
     Call describe_entity(entity) first to find the key_fields and key_format
-    for this entity — the key format varies per entity and using the wrong
+    for this entity - the key format varies per entity and using the wrong
     format causes a 500 error.
 
     Args:
         entity: Entity name.
-        id:     The record key — key field values joined with '/' in key order.
+        id:     The record key - key field values joined with '/' in key order.
                 Examples:
                   SalesOrder  → "QT/I004264"    (OrderType/OrderNbr)
                   Bill        → "Bill/001234"   (Type/ReferenceNbr)
@@ -574,7 +574,7 @@ def get_record(
 def upsert_record(entity: str, data: dict[str, Any]) -> dict[str, Any]:
     """Create or update a record (PUT /{Entity}). Requires ACUMATICA_ALLOW_WRITES=1.
 
-    Acumatica's contract-based API uses PUT for both create and update — the
+    Acumatica's contract-based API uses PUT for both create and update - the
     server decides based on whether key fields match an existing record.
 
     Args:
@@ -652,10 +652,10 @@ def get_schema(entity: str) -> dict[str, Any]:
        even though they don't appear explicitly in this schema response.
 
     Common SalesOrder view names (confirmed working):
-        Document          — SOOrder header fields (CreatedByID, BranchID, etc.)
-        CurrentDocument   — additional header computed fields
-        Transactions      — line-level fields (on Details rows)
-        Adjustments       — payment application fields
+        Document          - SOOrder header fields (CreatedByID, BranchID, etc.)
+        CurrentDocument   - additional header computed fields
+        Transactions      - line-level fields (on Details rows)
+        Adjustments       - payment application fields
 
     Example workflow:
         1. get_schema("SalesOrder")               # identify view names

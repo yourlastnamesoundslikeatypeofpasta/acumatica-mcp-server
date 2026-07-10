@@ -2,20 +2,20 @@
 
 The tools are thin wrappers over Acumatica's contract-based REST API. A few rules
 make queries reliable. Most failures come from guessing field names or key
-formats — so the golden rule is: **call `describe_entity` first.**
+formats - so the golden rule is: **call `describe_entity` first.**
 
 ## The workflow
 
-1. `list_entities("order")` — find the entity you want.
-2. `describe_entity("SalesOrder")` — get its exact `fields`, `key_fields`,
+1. `list_entities("order")` - find the entity you want.
+2. `describe_entity("SalesOrder")` - get its exact `fields`, `key_fields`,
    `key_format`, `actions`, and `expand` collections.
-3. `list_records` / `get_record` — query using only the names from step 2.
+3. `list_records` / `get_record` - query using only the names from step 2.
 
 ## Field names in `$select` and `$filter`
 
 - Field names **must exactly match** the names returned by `describe_entity().fields`.
 - A wrong field name causes an HTTP 500 `KeyNotFoundException`, not a friendly
-  error. Never guess — always pull names from `describe_entity`.
+  error. Never guess - always pull names from `describe_entity`.
 
 ## Key format for `get_record` / `delete_record`
 
@@ -31,7 +31,7 @@ Keys are the entity's key-field **values joined with `/`**, in key-field order.
 A record's GUID (the `id` field from a list response) also works as the key.
 
 Watch out for key values that themselves contain a `/` (e.g. an `ItemClass` ID
-like `A/C`) — use the record GUID instead.
+like `A/C`) - use the record GUID instead.
 
 ## Date filters
 
@@ -53,7 +53,7 @@ order. To reliably find the most recent records:
    (30, then 90 days) only if empty.
 2. Sort the results **client-side** by `Date` desc, then `LastModifiedDateTime` desc.
 
-This resolves "last created" queries in 1–2 calls instead of scanning everything.
+This resolves "last created" queries in 1-2 calls instead of scanning everything.
 
 ## Pulling extension fields with `$custom`
 
@@ -75,7 +75,7 @@ Some entities are inquiry/summary views with **no addressable key**.
 `mandatory_filters`. For these:
 
 - **Do not** call `get_record`.
-- Call `list_records` with **at least the mandatory filter fields** — calling with
+- Call `list_records` with **at least the mandatory filter fields** - calling with
   no filter typically returns HTTP 500 on these views.
 
 ## Browser deep links
@@ -99,11 +99,11 @@ the per-type value maps like `_AP_DOCTYPE`) for your tenant.
 tenant you're connected to, so they are **disabled by default**. Enable them
 deliberately via environment variables:
 
-- `ACUMATICA_ALLOW_WRITES=1` — enables `upsert_record` and `invoke_action`
-- `ACUMATICA_ALLOW_DELETES=1` — enables `delete_record`
+- `ACUMATICA_ALLOW_WRITES=1` - enables `upsert_record` and `invoke_action`
+- `ACUMATICA_ALLOW_DELETES=1` - enables `delete_record`
 
 When a mutating tool is called while disabled, it returns a `403`-style envelope
-with a `hint` telling you which variable to set — no request is sent to Acumatica.
+with a `hint` telling you which variable to set - no request is sent to Acumatica.
 
 The request body for writes uses Acumatica's wrapped shape:
 

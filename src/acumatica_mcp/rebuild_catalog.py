@@ -69,7 +69,7 @@ KEY_OVERRIDES: dict[str, list[str]] = {
 }
 
 # Entities that CANNOT be listed without mandatory filter parameters.
-# These are inquiry/summary views with BQL delegates — list_records with no filter
+# These are inquiry/summary views with BQL delegates - list_records with no filter
 # returns HTTP 500 "Optimization cannot be performed."
 # For these, query_only=true is set in the catalog; no key_format is generated.
 # InventoryQuantityAvailable may also be permission-locked (403), depending on the tenant.
@@ -130,10 +130,10 @@ def apply_annotations(catalog: dict) -> int:
     return touched
 
 
-# Base fields that appear on every entity via the Entity schema — omit from fields list
+# Base fields that appear on every entity via the Entity schema - omit from fields list
 BASE_FIELDS = {"id", "rowNumber", "note", "custom", "error", "files"}
 
-# Primitive value wrapper schemas — these hold a single .value; treat as scalar
+# Primitive value wrapper schemas - these hold a single .value; treat as scalar
 VALUE_SCHEMAS = {
     "StringValue", "BooleanValue", "DecimalValue", "DateTimeValue",
     "IntValue", "GuidValue", "ByteArrayValue", "ShortValue", "LongValue",
