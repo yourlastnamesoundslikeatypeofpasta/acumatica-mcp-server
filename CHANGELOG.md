@@ -3,6 +3,16 @@
 All notable changes to this project are documented here. This project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [0.2.0] - 2026-07-10
+
+Added a starter set of **skills**: repeatable, tested workflows layered on top of
+the raw tools.
+
+- New `skills/` folder with five read-only workflow skills: `recent-records`,
+  `ap-health`, `ar-health`, `three-way-match`, and `doc-doctor`.
+- README: new "Skills" section explaining the tools-vs-skills split and how to use
+  them.
+
 ## [0.1.0] - 2026-07-10
 
 Initial public release.

@@ -51,6 +51,7 @@ catalog that teaches the model each entity's fields, key format, and actions.
 - [Architecture](#architecture)
 - [The 8 tools](#the-8-tools)
 - [How a query flows](#how-a-query-flows)
+- [Skills (repeatable workflows)](#skills-repeatable-workflows)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Configuration](#configuration)
@@ -78,6 +79,9 @@ catalog that teaches the model each entity's fields, key format, and actions.
   straight to the record in the Acumatica web UI.
 - **Self-correcting queries.** Errors return actionable hints (wrong field name,
   missing mandatory filter, permission gap) instead of raw HTTP 500s.
+- **Repeatable workflows.** Ships example **skills** - packaged, tested procedures
+  (AP/AR health, three-way match, and more) that turn the raw tools into reliable,
+  one-command operations. See [Skills](#skills-repeatable-workflows).
 
 
 
@@ -134,6 +138,26 @@ flowchart TD
 ```
 
 
+
+## Skills (repeatable workflows)
+
+The 8 tools give a model the raw verbs. **Skills** turn those verbs into
+repeatable, tested workflows: the exact queries, fallbacks, and output format for a
+real task, written down once so the model runs it the same correct way every time.
+The [`skills/`](skills/) folder ships a starter set you can use as-is or adapt:
+
+| Skill | What it does |
+|-------|--------------|
+| [`recent-records`](skills/recent-records/SKILL.md) | Reliably find the latest / most-recent record of any entity (works around tenants that ignore `$orderby`). |
+| [`ap-health`](skills/ap-health/SKILL.md) | Accounts-payable health check: aging buckets, overdue bills, stale POs, uninvoiced receipts. |
+| [`ar-health`](skills/ar-health/SKILL.md) | Accounts-receivable health check: open AR, aging, unapplied payments, customer concentration. |
+| [`three-way-match`](skills/three-way-match/SKILL.md) | Reconcile Bill vs Purchase Receipt vs PO line by line and flag price / quantity variances. |
+| [`doc-doctor`](skills/doc-doctor/SKILL.md) | Diagnose why a document is stuck or wrong (receive failures, wrong totals, holds) and propose the fix. |
+
+Each skill is a single `SKILL.md` with frontmatter, in the format used by Claude
+Code / Claude Desktop skills. Drop the folder wherever your client discovers skills
+(for example your project's `.claude/skills/`) and invoke it by name. All five are
+read-only reporting workflows; none of them writes to your tenant.
 
 ## Requirements
 
