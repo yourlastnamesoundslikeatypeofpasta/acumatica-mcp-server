@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pwsh -NoProfile -ExecutionPolicy Bypass -File \"$CLAUDE_PROJECT_DIR/.claude/hooks/py-parse-gate.ps1\"",
+            "timeout": 30,
+            "statusMessage": "Byte-compiling after edit..."
+          }
+        ]
+      }
+    ]
+  }
+}
